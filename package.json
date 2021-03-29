@@ -1,0 +1,20 @@
+{
+  "name": "api-myblog",
+  "version": "0.0.1",
+  "description": "Api para géstion de blog",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon src/index.js"
+  },
+  "author": "Dario Mariño Ferrada",
+  "license": "MIT",
+  "dependencies": {
+    "bulma": "^0.9.2",
+    "colors": "^1.4.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-validator": "^6.10.0",
+    "mongoose": "^5.12.2",
+    "morgan": "^1.10.0"
+  }
+}

@@ -1,0 +1,30 @@
+###
+GET http://localhost:3000/api/posts?page=1
+
+###
+GET http://localhost:3000/api/posts/606134cf3140e9156cbb087a
+
+###
+POST http://localhost:3000/api/posts 
+Content-Type: application/json
+
+{
+    "title": "Titulo de prueba 21",
+    "subtitle": "Subtitulo de prueba",
+    "img_path": "https://picsum.photos/800/300",
+    "article": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quia, veniam molestias magni saepe eligendi natus? Odit, consequatur sed minima error aliquid alias illo unde cupiditate distinctio autem aliquam architecto reprehenderit!"
+}
+
+###
+PUT http://localhost:3000/api/posts/606142db9b2480157cf5cef2
+Content-Type: application/json
+
+{
+    "title": "Titulo de prueba 21",
+    "subtitle": "Subtitulo de prueba EDITADO",
+    "img_path": "https://picsum.photos/800/300",
+    "article": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quia, veniam molestias magni saepe eligendi natus? Odit, consequatur sed minima error aliquid alias illo unde cupiditate distinctio autem aliquam architecto reprehenderit!"
+}
+
+###
+DELETE http://localhost:3000/api/posts/606142db9b2480157cf5cef2
