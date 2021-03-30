@@ -1,11 +1,13 @@
-const app = require('./app');
 require('dotenv').config();
-require('colors')
+require('colors');
+
+// App init.
+const app = require('./app');
+// DB init.
 require('./database/configDB');
-
-
-
-// Server
+// Roles init.
+require('./libs/initRoles');
+// Server init
 (async () => {
     try {
         await app.listen(app.get('port'));
