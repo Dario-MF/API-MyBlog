@@ -4,9 +4,9 @@ POST http://localhost:3000/api/auth/signup
 Content-Type: application/json
 
 {
-    "name": "Test3",
+    "name": "Test5",
     "surname": "Test Test",
-    "email": "test3@test.com",
+    "email": "test5@test.com",
     "roles": ["USER_ROLE"],
     "password": "password1"
 }
@@ -16,7 +16,7 @@ POST http://localhost:3000/api/auth/signin
 Content-Type: application/json
 
 {
-    "email": "test1@test.com",
+    "email": "test2@test.com",
     "password": "password1"
 }
 
@@ -40,13 +40,13 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MDYzNGUwYzg5ZWY3
 }
 
 ###
-PUT http://localhost:3000/api/posts/606134cf3140e9156cbb087a
+PUT http://localhost:3000/api/posts/60634e6e86606f4b781a1408
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MDYyNjdmY2EyY2UzYTBiNzQ5NDhiZDIiLCJpYXQiOjE2MTcwNzAyOTMsImV4cCI6MTYxNzE1NjY5M30.TEhf04HYvRN9Zkm31ne408z7ua1FFBOYNUNbRd-p0pE
+Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MDYzNGRmOTg5ZWY3ZTFlNTgyZDk5MWQiLCJpYXQiOjE2MTcxMjY3NzUsImV4cCI6MTYxNzIxMzE3NX0.7ql6kcLnzoHIxBX-sgoGK32QaMIn5PR8NJLrDKxck5s
 
 {
     "title": "Titulo de prueba 1",
-    "subtitle": "Subtitulo de prueba",
+    "subtitle": "Subtitulo de prueba editado2",
     "img_path": "https://picsum.photos/800/300",
     "article": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quia, veniam molestias magni saepe eligendi natus? Odit, consequatur sed minima error aliquid alias illo unde cupiditate distinctio autem aliquam architecto reprehenderit!"
 }

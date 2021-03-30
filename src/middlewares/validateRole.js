@@ -23,7 +23,7 @@ const isAdminRole = async (req, res, next) => {
         };
     } catch (error) {
         return res.status(500).json({
-            error: 'problem in server.'
+            error: 'problem in server.(rol)'
         });
     };
     next();
@@ -50,7 +50,7 @@ const isModeratorRole = async (req, res, next) => {
         }
     } catch (error) {
         return res.status(500).json({
-            error: 'problem in server.'
+            error: 'problem in server.(rol)'
         });
     };
     next();
@@ -77,7 +77,7 @@ const isUserRole = async (req, res, next) => {
         }
     } catch (error) {
         return res.status(500).json({
-            error: 'problem in server.'
+            error: 'problem in server.(rol)'
         });
     };
     next();
