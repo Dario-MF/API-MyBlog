@@ -13,7 +13,7 @@ const signUp = async (req, res) => {
     });
     const savedUser = await newUser.save();
     const token = jwt.sign({ uid: savedUser._id }, process.env.SECRET_JWT, {
-        expiresIn: process.env.EXPIRES_IN_JWT
+        expiresIn: 86400
     });
     res.status(200).json({
         msg: 'Signup correct',
@@ -45,7 +45,7 @@ const signIn = async (req, res) => {
     };
     // Grabar token
     const token = jwt.sign({ uid: user._id }, process.env.SECRET_JWT, {
-        expiresIn: process.env.EXPIRES_IN_JWT
+        expiresIn: 86400
     });
 
     res.status(200).json({

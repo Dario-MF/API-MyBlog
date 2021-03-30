@@ -12,13 +12,15 @@ const getAllPosts = async (req, res) => {
                 .skip(perPage * page - perPage)//Calculo para paginación.
                 .limit(perPage)
         ]);
-        const pages = Math.ceil(total / perPage)
+        const pages = Math.ceil(total / perPage);
+        const next_page = `http://localhost:3000/api/posts?page=${page + 1}`
         res.status(200).json({
             msg: 'get posts OK',
             page,
             pages,
-            total,
-            posts
+            next_page,
+            total_posts: total,
+            data: posts
         });
     } catch (error) {
         res.status(500).json({
@@ -34,7 +36,7 @@ const getPostById = async (req, res) => {
         const post = await Post.findById(id);
         res.status(200).json({
             msg: 'post finded OK',
-            post
+            data: post
         });
     } catch (error) {
         res.status(500).json({
@@ -47,9 +49,10 @@ const getPostById = async (req, res) => {
 
 
 const createPost = async (req, res) => {
-    const { title, subtitle = '', img_path = '', article } = req.body;
+    const { title, subtitle, img_path = '', article } = req.body;
+    const author = req.user;
     try {
-        const newPost = await Post.create({ title, subtitle, img_path, article });
+        const newPost = await Post.create({ author: author._id, title, subtitle, img_path, article });
         res.status(200).json({
             msg: 'post created: OK',
             newPost

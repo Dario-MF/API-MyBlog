@@ -6,7 +6,7 @@ const {
     createPost,
     updatePost,
     deletePost } = require('../../controllers/posts.controller');
-const { validateErrors, validatePost } = require('../../middlewares');
+const { validateErrors, validatePost, validateToken, validateRol } = require('../../middlewares');
 
 
 router.get('/', getAllPosts);
@@ -22,6 +22,8 @@ router.get('/:id', [
 
 
 router.post('/', [
+    validateToken,
+    validateRol.isUserRole,
     check('title')
         .notEmpty()
         .withMessage('title is required')
@@ -42,6 +44,8 @@ router.post('/', [
 
 
 router.put('/:id', [
+    validateToken,
+    validateRol.isUserRole,
     check('id')
         .isMongoId()
         .withMessage('No es id valido')
@@ -66,6 +70,8 @@ router.put('/:id', [
 
 
 router.delete('/:id', [
+    validateToken,
+    validateRol.isUserRole,
     check('id')
         .isMongoId()
         .withMessage('No es id valido')

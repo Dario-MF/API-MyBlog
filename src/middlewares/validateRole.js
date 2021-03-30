@@ -6,54 +6,81 @@ const Role = require('../models/Role');
 const isAdminRole = async (req, res, next) => {
     if (!req.user) {
         return res.status(500).json({
-            msg: 'problem in server, need validate role after token'
+            error: 'problem in server, need validate role after token'
         });
     };
-    const roles = await Role.find({ _id: { $in: req.user.roles } });
-    roles.map(rol => {
-        if (rol.name === 'ADMIN_ROLE') {
-            next();
-        };
-    });
-    return res.status(403).json({
-        msg: 'Forbidden, access denied: role valid required.'
-    });
+    try {
+        const roles = await Role.find({ _id: { $in: req.user.roles } });
+        const isRoleValid = roles.map(rol => {
+            if (rol.name === 'ADMIN_ROLE') {
+                return true
+            };
+        });
+        if (!isRoleValid[0]) {
+            return res.status(403).json({
+                error: 'Forbidden, access denied: role valid required.'
+            });
+        }
+    } catch (error) {
+        return res.status(500).json({
+            error: 'problem in server.'
+        });
+    };
+    next();
 };
 
 // Filtro rol ventas.
 const isModeratorRole = async (req, res, next) => {
     if (!req.user) {
         return res.status(500).json({
-            msg: 'problem in server, need validate role after token'
+            error: 'problem in server, need validate role after token'
         });
     };
-    const roles = await Role.find({ _id: { $in: req.user.roles } });
-    roles.map(rol => {
-        if (rol.name === 'MODERATOR_ROLE' || rol.name === 'ADMIN_ROLE') {
-            next();
-        };
-    });
-    return res.status(403).json({
-        msg: 'Forbidden, access denied: role valid required.'
-    });
+    try {
+        const roles = await Role.find({ _id: { $in: req.user.roles } });
+        const isRoleValid = roles.map(rol => {
+            if (rol.name === 'MODERATOR_ROLE' || rol.name === 'ADMIN_ROLE') {
+                return true
+            };
+        });
+        if (!isRoleValid[0]) {
+            return res.status(403).json({
+                error: 'Forbidden, access denied: role valid required.'
+            });
+        }
+    } catch (error) {
+        return res.status(500).json({
+            error: 'problem in server.'
+        });
+    };
+    next();
 };
 
 // Filtro rol usuario.
 const isUserRole = async (req, res, next) => {
     if (!req.user) {
         return res.status(500).json({
-            msg: 'problem in server, need validate role after token'
+            error: 'problem in server, need validate role after token'
         });
     };
-    const roles = await Role.find({ _id: { $in: req.user.roles } });
-    roles.map(rol => {
-        if (rol.name === 'USER_ROLE' || rol.name === 'MODERATOR_ROLE' || rol.name === 'ADMIN_ROLE') {
-            next();
-        };
-    });
-    return res.status(403).json({
-        msg: 'Forbidden, access denied: role valid required.'
-    });
+    try {
+        const roles = await Role.find({ _id: { $in: req.user.roles } });
+        const isRoleValid = roles.map(rol => {
+            if (rol.name === 'USER_ROLE' || rol.name === 'MODERATOR_ROLE' || rol.name === 'ADMIN_ROLE') {
+                return true
+            };
+        });
+        if (!isRoleValid[0]) {
+            return res.status(403).json({
+                error: 'Forbidden, access denied: role valid required.'
+            });
+        }
+    } catch (error) {
+        return res.status(500).json({
+            error: 'problem in server.'
+        });
+    };
+    next();
 };
 
 
