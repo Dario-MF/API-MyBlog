@@ -1,12 +1,7 @@
 const router = require('express').Router();
 const { check } = require('express-validator');
-const {
-    getAllPosts,
-    getPostById,
-    createPost,
-    updatePost,
-    deletePost } = require('../../controllers/posts.controller');
-const { validateErrors, validatePost, validateToken, validateRol } = require('../../middlewares');
+const {getAllPosts, getPostById, createPost, updatePost, deletePost } = require('../../controllers/posts.controller');
+const { validateErrors, validatePost, validateToken, validateRol, validateUser } = require('../../middlewares');
 
 
 router.get('/', getAllPosts);
@@ -23,6 +18,7 @@ router.get('/:id', [
 
 router.post('/', [
     validateToken,
+    validateUser.isUserId,
     validateRol.isUserRole,
     check('title')
         .notEmpty()
@@ -45,7 +41,9 @@ router.post('/', [
 
 router.put('/:id', [
     validateToken,
+    validateUser.isUserId,
     validateRol.isUserRole,
+    validatePost.isAuthorPost,
     check('id')
         .isMongoId()
         .withMessage('No es id valido')
@@ -71,7 +69,9 @@ router.put('/:id', [
 
 router.delete('/:id', [
     validateToken,
+    validateUser.isUserId,
     validateRol.isUserRole,
+    validatePost.isAuthorPost,
     check('id')
         .isMongoId()
         .withMessage('No es id valido')

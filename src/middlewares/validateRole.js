@@ -20,7 +20,7 @@ const isAdminRole = async (req, res, next) => {
             return res.status(403).json({
                 error: 'Forbidden, access denied: role valid required.'
             });
-        }
+        };
     } catch (error) {
         return res.status(500).json({
             error: 'problem in server.'

@@ -4,10 +4,10 @@ POST http://localhost:3000/api/auth/signup
 Content-Type: application/json
 
 {
-    "name": "Test5",
+    "name": "Test3",
     "surname": "Test Test",
-    "email": "test5@test.com",
-    "roles": ["ADMIN_ROLE"],
+    "email": "test3@test.com",
+    "roles": ["USER_ROLE"],
     "password": "password1"
 }
 
@@ -30,10 +30,10 @@ GET http://localhost:3000/api/posts/606134cf3140e9156cbb087a
 ###
 POST http://localhost:3000/api/posts 
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MDYyNjdmY2EyY2UzYTBiNzQ5NDhiZDIiLCJpYXQiOjE2MTcwNzIyMDEsImV4cCI6MTYxNzE1ODYwMX0.21taUe6emPkhxOLUgcLA0f2gvRfKH0_lp538ediaxYs
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MDYzNGUwYzg5ZWY3ZTFlNTgyZDk5MWUiLCJpYXQiOjE2MTcxMjA3ODAsImV4cCI6MTYxNzIwNzE4MH0.UWWz126f-NF1bUaY3yVsedi1SlHyE545Ip7d9ExrHFI
 
 {
-    "title": "Titulo de prueba 16",
+    "title": "Titulo de prueba 1",
     "subtitle": "Subtitulo de prueba",
     "img_path": "https://picsum.photos/800/300",
     "article": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quia, veniam molestias magni saepe eligendi natus? Odit, consequatur sed minima error aliquid alias illo unde cupiditate distinctio autem aliquam architecto reprehenderit!"
