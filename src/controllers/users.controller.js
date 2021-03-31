@@ -1,61 +1,88 @@
-const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 
+const getAllUsers = async (req, res) => {
+    try {
+        const users = await User.find({ state: true });
+        res.status(200).json({
+            msg: 'respuesta OK',
+            data: users
+        });
+    } catch (error) {
+        res.status(500).json({
+            error: 'error in server'
+        });
+    };
+};
 
-const signUp = async (req, res) => {
-    const { name, surname, email, password, idRoles } = req.body;
-    const newUser = new User({
-        name,
-        surname,
-        email,
-        roles: idRoles,
-        password: await User.ecryptPassword(password)
-    });
-    const savedUser = await newUser.save();
-    const token = jwt.sign({ uid: savedUser._id }, process.env.SECRET_JWT, {
-        expiresIn: 86400
-    });
-    res.status(200).json({
-        msg: 'Signup correct',
-        token
-    });
+const getUserWithId = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const user = await User.findById(id);
+        if (!user) {
+            res.status(400).json({
+                error: `user with id: ${id} not exist`
+            });
+        };
+        res.status(200).json({
+            msg: 'respuesta OK',
+            data: user
+        });
+    } catch (error) {
+        res.status(500).json({
+            error: 'error in server'
+        });
+    };
+};
+
+const updateUser = async (req, res) => {
+    const { name, surname, email, idRoles, newPassword, oldPassword } = req.body;
+    const { id } = req.params;
+    try {
+        const user = await User.findById(id);
+        const validPassword = await User.comparePassword(oldPassword, user.password);
+        if (!validPassword) {
+            return res.status(400).json({
+                msg: 'email or password incorrect'
+            });
+        };
+        const updated = await User.findByIdAndUpdate(user._id, {
+            name,
+            surname,
+            email,
+            roles: idRoles,
+            password: await User.ecryptPassword(newPassword)
+        }, { new: true });
+        res.status(200).json({
+            msg: 'user updated',
+            data: updated
+        });
+    } catch (error) {
+        res.status(500).json({
+            error: 'error in server'
+        });
+    };
 };
 
 
-const signIn = async (req, res) => {
-    const { email, password } = req.body;
-    // Validar email
-    const user = await User.findOne({ email });
-    if (!user) {
-        return res.status(400).json({
-            msg: 'email or password incorrect'
+const deleteUser = async (req, res) => {
+    const { uid } = req.user;
+    try {
+        const deleted = await User.findByIdAndUpdate(uid, { state: false }, { new: true });
+        res.status(200).json({
+            msg: 'user deleted',
+            data: deleted
         });
-    }
-    if (!user.state) {
-        return res.status(400).json({
-            msg: 'email or password incorrect'
-        });
-    }
-    // validar password.
-    const validPassword = await User.comparePassword(password, user.password);
-    if (!validPassword) {
-        return res.status(400).json({
-            msg: 'email or password incorrect'
+    } catch (error) {
+        res.status(500).json({
+            error: 'error in server'
         });
     };
-    // Grabar token
-    const token = jwt.sign({ uid: user._id }, process.env.SECRET_JWT, {
-        expiresIn: 86400
-    });
-
-    res.status(200).json({
-        msg: 'Signin correct',
-        token
-    });
 };
 
 
 module.exports = {
-    signUp,
-    signIn
+    getAllUsers,
+    getUserWithId,
+    updateUser,
+    deleteUser
 };

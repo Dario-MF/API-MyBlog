@@ -1,4 +1,5 @@
 const User = require('../models/User');
+const Role = require('../models/Role');
 
 
 // validar si el user email esta en uso.
@@ -26,7 +27,40 @@ const isUserId = async (req, res, next) => {
     next();
 };
 
+// Validar si el usuario es dueño de la cuenta sobre la que quiere actuar o tine rol administrador.
+const isOwnerUser = async (req, res, next) => {
+    try {
+        const { _id, roles } = req.user;
+        const paramId = req.params.id;
+        const paramUser = await User.findById(paramId);
+        if (!paramUser) {
+            return res.status(400).json({
+                error: 'id user invalid'
+            });
+        };
+        const userRoles = await Role.find({ _id: { $in: roles } });
+        const validUser = userRoles.map(rol => {
+            if (rol.name !== 'ADMIN_ROLE' && _id !== paramUser._id) {
+                return false;
+            };
+            return true;
+        });
+        if (!validUser[0]) {
+            return res.status(401).json({
+                error: 'require permission to make changes'
+            });
+        };
+        next();
+    } catch (error) {
+        console.log(error)
+        return res.status(500).json({
+            error: 'problem in server (owner)'
+        });
+    };
+};
+
 module.exports = {
     isUserEmail,
-    isUserId
+    isUserId,
+    isOwnerUser
 };

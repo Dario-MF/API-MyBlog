@@ -84,28 +84,47 @@ const isUserRole = async (req, res, next) => {
 };
 
 
-// Filtro, si no hay rol se usa user predefinido, si hay se comprueban.
+// Filtro, si no hay rol se usa user predefinido, si hay se comprueba.
 const isValidRole = async (req, res, next) => {
-
-    if (!req.body.roles || !req.body.roles.length) {
+    const roles = req.body.roles;
+    if (!roles || !roles.length) {
         const role = await Role.findOne({ name: 'USER_ROLE' });
         req.body.idRoles = [role._id];
 
+    } else if (!roles.includes('USER_ROLE')) {
+        return res.status(400).json({
+            msg: 'Invalid role'
+        });
     } else {
-        const roles = await Role.find({ name: { $in: req.body.roles } });
-        if (!roles.length) {
-            return res.status(400).json({
-                msg: 'Invalid role'
-            });
-        };
-        req.body.idRoles = roles.map(rol => rol._id);
+        const role = await Role.findOne({ name: 'USER_ROLE' });
+        req.body.idRoles = [role._id];
     };
     next();
 };
+
+
+const updateRole = async (req, res, next) => {
+    // Roles para actualizar
+    const rolesBody = req.body.roles;
+    // Roles del user que realiza la peticion
+    const roles = await Role.find({ _id: { $in: req.user.roles } });
+    // Validacion de si tiene rol suficionte para modificar el rol a un rango superior.
+    if (roles[0].name === 'ADMIN_ROLE') {
+        const idRoles = await Role.find({ _id: { $in: rolesBody } })
+    }
+    console.log(roles);
+    req.body.idRoles = roles;
+    next();
+};
+
+
+
+
 
 module.exports = {
     isAdminRole,
     isModeratorRole,
     isUserRole,
-    isValidRole
+    isValidRole,
+    updateRole
 };

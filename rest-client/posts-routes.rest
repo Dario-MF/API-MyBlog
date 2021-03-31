@@ -1,26 +1,4 @@
-////////////////////////////////////////---- AUTH ROUTES-----\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-###
-POST http://localhost:3000/api/auth/signup
-Content-Type: application/json
-
-{
-    "name": "Test5",
-    "surname": "Test Test",
-    "email": "test5@test.com",
-    "roles": ["USER_ROLE"],
-    "password": "password1"
-}
-
-###
-POST http://localhost:3000/api/auth/signin
-Content-Type: application/json
-
-{
-    "email": "test2@test.com",
-    "password": "password1"
-}
-
-////////////////////////////////////////---- POSTS ROUTES-----\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+//////////////////////////////---- POSTS ROUTES-----\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 ###
 GET http://localhost:3000/api/posts?page=1
 

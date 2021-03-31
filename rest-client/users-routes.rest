@@ -1,0 +1,20 @@
+///////////////////////---- USERS ROUTES-----\\\\\\\\\\\\\\\\\\\\\\\\
+###
+GET http://localhost:3000/api/users
+
+###
+GET http://localhost:3000/api/users/606284948cf2111b882f68bc
+
+###
+PUT http://localhost:3000/api/users/6063d21c35a0eb16f0d8da67
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MDYyNjdmY2EyY2UzYTBiNzQ5NDhiZDIiLCJpYXQiOjE2MTcxNjEyODUsImV4cCI6MTYxNzI0NzY4NX0.QGt4D3J9SxFHI8pEYcvLHdz0DdORSNXaNXFRmWvVpUI
+
+{
+    "name": "Test6",
+    "surname": "Test Test",
+    "email": "test6@test.com",
+    "roles": ["MODERATOR_ROLE"],
+    "newPassword": "password1",
+    "oldPassword": "password1"
+}
