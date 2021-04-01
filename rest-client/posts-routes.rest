@@ -1,3 +1,6 @@
+admin eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MDYyNjdmY2EyY2UzYTBiNzQ5NDhiZDIiLCJpYXQiOjE2MTcyMzE3OTksImV4cCI6MTYxNzMxODE5OX0.sSc2zGgecN56WJgbU8zenyqlnMfZb14CAKGxHKf8KhU
+moderator 
+user eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MDY1MDAxZDk5YjdjNDIzOTg0NGM1OTAiLCJpYXQiOjE2MTcyMzE5MDEsImV4cCI6MTYxNzMxODMwMX0.GDNylwUFV_oBcBBkoTUCCH1e0ndoilPZ0Uq3ujbLhJY
 //////////////////////////////---- POSTS ROUTES-----\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 ###
 GET http://localhost:3000/api/posts?page=1
@@ -8,27 +11,27 @@ GET http://localhost:3000/api/posts/606134cf3140e9156cbb087a
 ###
 POST http://localhost:3000/api/posts 
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MDYzNGUwYzg5ZWY3ZTFlNTgyZDk5MWUiLCJpYXQiOjE2MTcxMjA3ODAsImV4cCI6MTYxNzIwNzE4MH0.UWWz126f-NF1bUaY3yVsedi1SlHyE545Ip7d9ExrHFI
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MDY1MDAxZDk5YjdjNDIzOTg0NGM1OTAiLCJpYXQiOjE2MTcyMzE5MDEsImV4cCI6MTYxNzMxODMwMX0.GDNylwUFV_oBcBBkoTUCCH1e0ndoilPZ0Uq3ujbLhJY
 
 {
-    "title": "Titulo de prueba 1",
+    "title": "Titulo de prueba 2",
     "subtitle": "Subtitulo de prueba",
     "img_path": "https://picsum.photos/800/300",
     "article": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quia, veniam molestias magni saepe eligendi natus? Odit, consequatur sed minima error aliquid alias illo unde cupiditate distinctio autem aliquam architecto reprehenderit!"
 }
 
 ###
-PUT http://localhost:3000/api/posts/60634e6e86606f4b781a1408
+PUT http://localhost:3000/api/posts/6065010f99b7c4239844c592
 Content-Type: application/json
-Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MDYzNGRmOTg5ZWY3ZTFlNTgyZDk5MWQiLCJpYXQiOjE2MTcxMjY3NzUsImV4cCI6MTYxNzIxMzE3NX0.7ql6kcLnzoHIxBX-sgoGK32QaMIn5PR8NJLrDKxck5s
+Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MDY1MDAxZDk5YjdjNDIzOTg0NGM1OTAiLCJpYXQiOjE2MTcyMzE5MDEsImV4cCI6MTYxNzMxODMwMX0.GDNylwUFV_oBcBBkoTUCCH1e0ndoilPZ0Uq3ujbLhJY
 
 {
-    "title": "Titulo de prueba 1",
+    "title": "Titulo de prueba 2",
     "subtitle": "Subtitulo de prueba editado2",
     "img_path": "https://picsum.photos/800/300",
     "article": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quia, veniam molestias magni saepe eligendi natus? Odit, consequatur sed minima error aliquid alias illo unde cupiditate distinctio autem aliquam architecto reprehenderit!"
 }
 
 ###
-DELETE http://localhost:3000/api/posts/60627a105a2cab2fbc4cd1bb
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MDYyNjdmY2EyY2UzYTBiNzQ5NDhiZDIiLCJpYXQiOjE2MTcwNjkwOTAsImV4cCI6MTYxNzA2OTE3Nn0.8nvuNvlU3pHoPfP_5il5U6HRNDEXQer1BcbaXL_1EQE
+DELETE http://localhost:3000/api/posts/6065010f99b7c4239844c592
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MDY1MDAxZDk5YjdjNDIzOTg0NGM1OTAiLCJpYXQiOjE2MTcyMzE5MDEsImV4cCI6MTYxNzMxODMwMX0.GDNylwUFV_oBcBBkoTUCCH1e0ndoilPZ0Uq3ujbLhJY

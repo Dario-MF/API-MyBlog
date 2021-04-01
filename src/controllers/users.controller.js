@@ -39,35 +39,53 @@ const updateUser = async (req, res) => {
     const { id } = req.params;
     try {
         const user = await User.findById(id);
-        const validPassword = await User.comparePassword(oldPassword, user.password);
-        if (!validPassword) {
-            return res.status(400).json({
-                msg: 'email or password incorrect'
-            });
+        // Validar password
+        let msgPassword = 'password no updated';
+        if (newPassword && oldPassword) {
+            const validPassword = await User.comparePassword(oldPassword, user.password);
+            if (!validPassword) {
+                return res.status(400).json({
+                    msg: 'email or password incorrect'
+                });
+            };
+            msgPassword = 'password updated successfully '
         };
+        // Validar email
+        if (email !== user.email) {
+            const emailExist = await User.findOne({ email });
+            if (emailExist) {
+                return res.status(400).json({
+                    msg: 'email or password incorrect'
+                });
+            };
+        };
+        // Actualizar usuario.
         const updated = await User.findByIdAndUpdate(user._id, {
-            name,
-            surname,
-            email,
-            roles: idRoles,
-            password: await User.ecryptPassword(newPassword)
+            name: (name) ? name : user.name,
+            surname: (surname) ? surname : user.surname,
+            email: (email) ? email : user.email,
+            roles: (idRoles) ? idRoles : user.roles,
+            password: (newPassword && oldPassword) ? await User.ecryptPassword(newPassword) : user.password
         }, { new: true });
+
+
         res.status(200).json({
             msg: 'user updated',
+            msgPassword,
             data: updated
         });
     } catch (error) {
         res.status(500).json({
-            error: 'error in server'
+            error: 'error in server ctrller'
         });
     };
 };
 
 
 const deleteUser = async (req, res) => {
-    const { uid } = req.user;
+    const { id } = req.params;
     try {
-        const deleted = await User.findByIdAndUpdate(uid, { state: false }, { new: true });
+        const deleted = await User.findByIdAndUpdate(id, { state: false }, { new: true });
         res.status(200).json({
             msg: 'user deleted',
             data: deleted

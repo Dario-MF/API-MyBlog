@@ -1,86 +1,27 @@
 const Role = require('../models/Role');
 
 
-
-// Filtro de rol Administrador.
-const isAdminRole = async (req, res, next) => {
+// Autentificar ruta por roles pasados por parametro.
+const authenticateRole = (authorizedRoles = []) => async (req, res, next) => {
     if (!req.user) {
         return res.status(500).json({
             error: 'problem in server, need validate role after token'
         });
     };
-    try {
-        const roles = await Role.find({ _id: { $in: req.user.roles } });
-        const isRoleValid = roles.map(rol => {
-            if (rol.name === 'ADMIN_ROLE') {
-                return true
-            };
-        });
-        if (!isRoleValid[0]) {
-            return res.status(403).json({
-                error: 'Forbidden, access denied: role valid required.'
-            });
-        };
-    } catch (error) {
-        return res.status(500).json({
-            error: 'problem in server.(rol)'
-        });
-    };
-    next();
-};
+    let rolesReq = await Role.find({ _id: { $in: req.user.roles } });
+    rolesReq = rolesReq.map(rolReq => rolReq.name);
 
-// Filtro rol ventas.
-const isModeratorRole = async (req, res, next) => {
-    if (!req.user) {
-        return res.status(500).json({
-            error: 'problem in server, need validate role after token'
-        });
-    };
-    try {
-        const roles = await Role.find({ _id: { $in: req.user.roles } });
-        const isRoleValid = roles.map(rol => {
-            if (rol.name === 'MODERATOR_ROLE' || rol.name === 'ADMIN_ROLE') {
-                return true
-            };
-        });
-        if (!isRoleValid[0]) {
-            return res.status(403).json({
-                error: 'Forbidden, access denied: role valid required.'
-            });
-        }
-    } catch (error) {
-        return res.status(500).json({
-            error: 'problem in server.(rol)'
-        });
-    };
-    next();
-};
+    const authorized = authorizedRoles.map(roleAuth => {
+        return rolesReq.includes(roleAuth);
+    });
 
-// Filtro rol usuario.
-const isUserRole = async (req, res, next) => {
-    if (!req.user) {
-        return res.status(500).json({
-            error: 'problem in server, need validate role after token'
-        });
+    if (authorized.includes(true)) {
+        return next();
     };
-    try {
-        const roles = await Role.find({ _id: { $in: req.user.roles } });
-        const isRoleValid = roles.map(rol => {
-            if (rol.name === 'USER_ROLE' || rol.name === 'MODERATOR_ROLE' || rol.name === 'ADMIN_ROLE') {
-                return true
-            };
-        });
-        if (!isRoleValid[0]) {
-            return res.status(403).json({
-                error: 'Forbidden, access denied: role valid required.'
-            });
-        }
-    } catch (error) {
-        return res.status(500).json({
-            error: 'problem in server.(rol)'
-        });
-    };
-    next();
+    return res.status(401).json({
+        success: false,
+        message: ` Unauthorized, need rol: ${authorizedRoles}`,
+    });
 };
 
 
@@ -102,29 +43,36 @@ const isValidRole = async (req, res, next) => {
     next();
 };
 
-
+// Validacion de si tiene rol admin, para modificar roles,
+// en caso contrario no se permite el cambio
 const updateRole = async (req, res, next) => {
-    // Roles para actualizar
-    const rolesBody = req.body.roles;
-    // Roles del user que realiza la peticion
-    const roles = await Role.find({ _id: { $in: req.user.roles } });
-    // Validacion de si tiene rol suficionte para modificar el rol a un rango superior.
-    if (roles[0].name === 'ADMIN_ROLE') {
-        const idRoles = await Role.find({ _id: { $in: rolesBody } })
-    }
-    console.log(roles);
-    req.body.idRoles = roles;
-    next();
+    try {
+        let rolesUpdate = req.body.roles;
+
+        let rolesReq = await Role.find({ _id: { $in: req.user.roles } });
+        rolesReq = rolesReq.map(rolReq => rolReq.name);
+
+        const authorized = rolesReq.includes('ADMIN_ROLE');
+        if (authorized) {
+            rolesUpdate = await Role.find({ name: { $in: rolesUpdate } });
+            req.body.idRoles = (rolesUpdate.length) ? rolesUpdate.map(rol => rol._id) : null
+            return next();
+
+        } else {
+            console.log('no autorizado a cambiar roles', rolesReq)
+            req.body.idRoles = null;
+            return next();
+        };
+    } catch (error) {
+        return res.status(500).json({
+            error: 'error in server'
+        });
+    };
 };
 
 
-
-
-
 module.exports = {
-    isAdminRole,
-    isModeratorRole,
-    isUserRole,
+    authenticateRole,
     isValidRole,
     updateRole
 };

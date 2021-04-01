@@ -5,13 +5,23 @@ const { signUp, signIn } = require('../../controllers/auth.controller');
 
 
 router.post('/signup', [
-    check('name', 'name is required').notEmpty(),
-    check('surname', 'surname is required').notEmpty(),
+    check('name')
+        .notEmpty()
+        .withMessage('name is required')
+        .isLength({ min: 2, max: 20 })
+        .withMessage("name can contain max 20 characters"),
+    check('surname')
+        .notEmpty()
+        .withMessage('surname is required')
+        .isLength({ min: 2, max: 40 })
+        .withMessage("surname can contain max 40 characters"),
     check('email')
         .notEmpty()
         .withMessage('email is required')
         .isEmail()
         .withMessage('email is invalid')
+        .isLength({ min: 6, max: 30 })
+        .withMessage("email can contain max 30 characters")
         .custom(validateUser.isUserEmail),
     check('password')
         .notEmpty()

@@ -1,5 +1,6 @@
 const User = require('../models/User');
 const Role = require('../models/Role');
+const { check } = require('express-validator');
 
 
 // validar si el user email esta en uso.
@@ -40,27 +41,44 @@ const isOwnerUser = async (req, res, next) => {
         };
         const userRoles = await Role.find({ _id: { $in: roles } });
         const validUser = userRoles.map(rol => {
-            if (rol.name !== 'ADMIN_ROLE' && _id !== paramUser._id) {
+            if (rol.name !== 'ADMIN_ROLE' && toString(_id) !== toString(paramUser._id)) {
                 return false;
             };
             return true;
         });
-        if (!validUser[0]) {
+        if (validUser.includes(true)) {
+            return next()
+        } else {
             return res.status(401).json({
                 error: 'require permission to make changes'
             });
         };
-        next();
     } catch (error) {
         console.log(error)
         return res.status(500).json({
-            error: 'problem in server (owner)'
+            error: 'problem in server'
         });
     };
 };
 
+const checkPassword = (password = null) => {
+    if (password) {
+        if (password.length < 6 || password.length > 20) {
+            console.log(password)
+            return new Error();
+        }
+        if (password.match(/\d/)) {
+            return new Error();
+        }
+    };
+    return
+};
+
+
+
 module.exports = {
     isUserEmail,
     isUserId,
-    isOwnerUser
+    isOwnerUser,
+    checkPassword
 };

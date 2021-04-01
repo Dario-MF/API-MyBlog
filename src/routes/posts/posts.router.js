@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const { check } = require('express-validator');
-const {getAllPosts, getPostById, createPost, updatePost, deletePost } = require('../../controllers/posts.controller');
+const { getAllPosts, getPostById, createPost, updatePost, deletePost } = require('../../controllers/posts.controller');
 const { validateErrors, validatePost, validateToken, validateRol, validateUser } = require('../../middlewares');
 
 
@@ -19,7 +19,7 @@ router.get('/:id', [
 router.post('/', [
     validateToken,
     validateUser.isUserId,
-    validateRol.isUserRole,
+    validateRol.authenticateRole(['USER_ROLE', 'MODERATOR_ROLE', 'ADMIN_ROLE']),
     check('title')
         .notEmpty()
         .withMessage('title is required')
@@ -42,7 +42,7 @@ router.post('/', [
 router.put('/:id', [
     validateToken,
     validateUser.isUserId,
-    validateRol.isUserRole,
+    validateRol.authenticateRole(['USER_ROLE', 'MODERATOR_ROLE', 'ADMIN_ROLE']),
     validatePost.isAuthorPost,
     check('id')
         .isMongoId()
@@ -70,7 +70,7 @@ router.put('/:id', [
 router.delete('/:id', [
     validateToken,
     validateUser.isUserId,
-    validateRol.isUserRole,
+    validateRol.authenticateRole(['USER_ROLE', 'MODERATOR_ROLE', 'ADMIN_ROLE']),
     validatePost.isAuthorPost,
     check('id')
         .isMongoId()
