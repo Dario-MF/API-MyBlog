@@ -3,11 +3,12 @@ const User = require('../models/User');
 
 
 const signUp = async (req, res) => {
-    const { name, surname, email, password, idRoles } = req.body;
+    const { name, surname, email, img_avatar = '', password, idRoles } = req.body;
     const newUser = new User({
         name,
         surname,
         email,
+        img_avatar,
         roles: idRoles,
         password: await User.ecryptPassword(password)
     });

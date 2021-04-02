@@ -1,5 +1,6 @@
 const { Schema, model } = require('mongoose');
 const bcrypt = require('bcryptjs');
+require('dotenv').config();
 
 
 const userSchema = new Schema({
@@ -21,7 +22,7 @@ const userSchema = new Schema({
         trim: true,
         unique: true
     },
-    img: {
+    img_avatar: {
         type: String
     },
     password: {
@@ -31,9 +32,11 @@ const userSchema = new Schema({
     },
     roles: [{
         ref: 'Role',
-        type: Schema.Types.ObjectId,
-        required: [true, 'rol is required.']
+        type: Schema.Types.ObjectId
     }],
+    posts: {
+        type: String
+    },
     google: {
         type: Boolean,
         default: false
@@ -63,10 +66,11 @@ userSchema.statics.comparePassword = async (password, receivedPassword) => {
 // Parsing for all response, not password and rename _id
 userSchema.methods.toJSON = function () {
     const { password, _id, ...user } = this.toObject();
+    user.posts = `${process.env.PATH_API}/posts?author=${_id}`
     user.uid = _id;
     return user;
 };
 
 
 
-module.exports = model('user', userSchema);
+module.exports = model('User', userSchema);

@@ -1,20 +1,23 @@
 admin eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MDYyNjdmY2EyY2UzYTBiNzQ5NDhiZDIiLCJpYXQiOjE2MTcyMzE3OTksImV4cCI6MTYxNzMxODE5OX0.sSc2zGgecN56WJgbU8zenyqlnMfZb14CAKGxHKf8KhU
 moderator 
-user eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MDY1MDAxZDk5YjdjNDIzOTg0NGM1OTAiLCJpYXQiOjE2MTcyMzE5MDEsImV4cCI6MTYxNzMxODMwMX0.GDNylwUFV_oBcBBkoTUCCH1e0ndoilPZ0Uq3ujbLhJY
+user eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MDY1MDkzMGUxODFmZjJkMjAzNjE5ZDAiLCJpYXQiOjE2MTczNzk3NzEsImV4cCI6MTYxNzQ2NjE3MX0.2a2zzcSta4lxBZyMZYiJYQPCsgk6mPkCqZUGc6a5mPo
 //////////////////////////////---- POSTS ROUTES-----\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 ###
 GET http://localhost:3000/api/posts?page=1
 
 ###
-GET http://localhost:3000/api/posts/606134cf3140e9156cbb087a
+GET http://localhost:3000/api/posts?author=606746abb5125804e0550e5e&page=1
+
+###
+GET http://localhost:3000/api/posts/60675433081f9b372cd8cfb2
 
 ###
 POST http://localhost:3000/api/posts 
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MDY1MDAxZDk5YjdjNDIzOTg0NGM1OTAiLCJpYXQiOjE2MTcyMzE5MDEsImV4cCI6MTYxNzMxODMwMX0.GDNylwUFV_oBcBBkoTUCCH1e0ndoilPZ0Uq3ujbLhJY
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MDY3NDZhYmI1MTI1ODA0ZTA1NTBlNWUiLCJpYXQiOjE2MTczODEwMzUsImV4cCI6MTYxNzQ2NzQzNX0.MPIFdgKHOQKFQCK2-gS-VSYkJP2RGeHLxMCfh_Wdnkg
 
 {
-    "title": "Titulo de prueba 2",
+    "title": "Titulo de prueba 22:00",
     "subtitle": "Subtitulo de prueba",
     "img_path": "https://picsum.photos/800/300",
     "article": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quia, veniam molestias magni saepe eligendi natus? Odit, consequatur sed minima error aliquid alias illo unde cupiditate distinctio autem aliquam architecto reprehenderit!"

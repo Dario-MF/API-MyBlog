@@ -2,7 +2,7 @@ const User = require('../models/User');
 
 const getAllUsers = async (req, res) => {
     try {
-        const users = await User.find({ state: true });
+        const users = await User.find({ state: true }).populate('roles', { name: 1, _id: 0 });
         res.status(200).json({
             msg: 'respuesta OK',
             data: users
@@ -17,7 +17,7 @@ const getAllUsers = async (req, res) => {
 const getUserWithId = async (req, res) => {
     try {
         const { id } = req.params;
-        const user = await User.findById(id);
+        const user = await User.findById(id).populate('roles', { name: 1, _id: 0 });
         if (!user) {
             res.status(400).json({
                 error: `user with id: ${id} not exist`
@@ -68,6 +68,7 @@ const updateUser = async (req, res) => {
             password: (newPassword && oldPassword) ? await User.ecryptPassword(newPassword) : user.password
         }, { new: true });
 
+        await updated.populate('roles', { name: 1, _id: 0 }).execPopulate();
 
         res.status(200).json({
             msg: 'user updated',

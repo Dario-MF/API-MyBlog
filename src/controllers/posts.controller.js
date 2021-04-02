@@ -1,26 +1,22 @@
+const { paginatePosts, authorPosts } = require('../libs/querysPost');
 const Post = require('../models/Post');
 
 
 
 const getAllPosts = async (req, res) => {
-    const perPage = 9;
     const page = Number(req.query.page) || 1;
     try {
-        const [total, posts] = await Promise.all([
-            Post.countDocuments(),
-            Post.find()
-                .skip(perPage * page - perPage)//Calculo para paginación.
-                .limit(perPage)
-        ]);
-        const pages = Math.ceil(total / perPage);
-        const next_page = `http://localhost:3000/api/posts?page=${page + 1}`
+        let data;
+        if (req.query.author) {
+            // busqueda por author y pagina.
+            data = await authorPosts(req.query.author, page);
+        } else {
+            // busqueda normal por pagina.
+            data = await paginatePosts(page);
+        };
         res.status(200).json({
             msg: 'get posts OK',
-            page,
-            pages,
-            next_page,
-            total_posts: total,
-            data: posts
+            data
         });
     } catch (error) {
         res.status(500).json({
@@ -33,7 +29,7 @@ const getAllPosts = async (req, res) => {
 const getPostById = async (req, res) => {
     const { id } = req.params;
     try {
-        const post = await Post.findById(id);
+        const post = await Post.findById(id).populate('author', { _id: 0, name: 1, surname: 1, img: 1 });
         res.status(200).json({
             msg: 'post finded OK',
             data: post
@@ -50,9 +46,9 @@ const getPostById = async (req, res) => {
 
 const createPost = async (req, res) => {
     const { title, subtitle, img_path = '', article } = req.body;
-    const author = req.user;
+    const { _id } = req.user;
     try {
-        const newPost = await Post.create({ author: author._id, title, subtitle, img_path, article });
+        const newPost = await Post.create({ author: _id, title, subtitle, img_path, article });
         res.status(200).json({
             msg: 'post created: OK',
             newPost

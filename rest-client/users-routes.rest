@@ -6,15 +6,15 @@ GET http://localhost:3000/api/users
 GET http://localhost:3000/api/users/606284948cf2111b882f68bc
 
 ###
-PUT http://localhost:3000/api/users/60650930e181ff2d203619d0
+PUT http://localhost:3000/api/users/6062685fa2ce3a0b74948bd5
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MDYyNjdmY2EyY2UzYTBiNzQ5NDhiZDIiLCJpYXQiOjE2MTcyMzE3OTksImV4cCI6MTYxNzMxODE5OX0.sSc2zGgecN56WJgbU8zenyqlnMfZb14CAKGxHKf8KhU
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MDYyNjdmY2EyY2UzYTBiNzQ5NDhiZDIiLCJpYXQiOjE2MTczODU4NTUsImV4cCI6MTYxNzQ3MjI1NX0.-tEHZd-DOkRsJDOzodJbAOF4EnbmcodYfK5M1EXsn4A
 
 {
-    "name": "Test9",
+    "name": "Test4",
     "surname": "Test Test",
-    "email": "test9@test.com",
-    "roles": ["MODERATOR_ROLE"],
+    "email": "test4@test.com",
+    "roles": ["USER_ROLE"],
     "newPassword": "password1",
     "oldPassword": "password1"
 }

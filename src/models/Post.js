@@ -2,9 +2,8 @@ const { Schema, model } = require('mongoose');
 
 const postSchema = new Schema({
     author: {
-        ref: 'User',
         type: Schema.Types.ObjectId,
-        required: [true, 'user is required.']
+        ref: 'User'
     },
     title: {
         type: String,
@@ -35,4 +34,4 @@ const postSchema = new Schema({
 
 
 
-module.exports = model('post', postSchema);
+module.exports = model('Post', postSchema);
