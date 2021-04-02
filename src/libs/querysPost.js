@@ -2,7 +2,7 @@ const Post = require("../models/Post");
 const User = require("../models/User");
 
 
-
+// Busqueda de post por pagina.
 const paginatePosts = async (page) => {
     const perPage = 9;
     const [total, posts] = await Promise.all([
@@ -25,7 +25,7 @@ const paginatePosts = async (page) => {
         posts
     };
 };
-
+// Busqueda de post por author y pagina
 const authorPosts = async (authorId, page) => {
     const userExist = await User.findById(authorId);
     if (!userExist) {
@@ -51,7 +51,8 @@ const authorPosts = async (authorId, page) => {
         pages,
         next_page,
         total_posts: total,
-        posts
+        posts,
+        author: userExist
     };
 };
 

@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const toonavatar = require('cartoon-avatar');
 const User = require('../models/User');
 
 
@@ -8,7 +9,7 @@ const signUp = async (req, res) => {
         name,
         surname,
         email,
-        img_avatar,
+        img_avatar: (img_avatar) ? img_avatar : toonavatar.generate_avatar(),
         roles: idRoles,
         password: await User.ecryptPassword(password)
     });
