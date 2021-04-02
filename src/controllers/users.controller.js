@@ -1,11 +1,28 @@
 const User = require('../models/User');
 
 const getAllUsers = async (req, res) => {
+    const page = Number(req.query.page) || 1;
     try {
-        const users = await User.find({ state: true }).populate('roles', { name: 1, _id: 0 });
+        const perPage = 9;
+        const [total, users] = await Promise.all([
+            User.countDocuments(),
+            User.find({ state: true }, { name: 1, surname: 1, img_avatar: 1 })
+                .sort({ 'updatedAt': -1 })// Orden por fecha ascendiente.
+                .skip(perPage * page - perPage)//Calculo para paginación.
+                .limit(perPage)
+                .populate('roles', { name: 1, _id: 0 })
+        ]);
+        const pages = Math.ceil(total / perPage);// Calculo paginas totales.
+        const next_page = (page >= pages)
+            ? 'No more pages'
+            : `${process.env.PATH_API}/users?page=${page + 1}`
         res.status(200).json({
             msg: 'respuesta OK',
-            data: users
+            page,
+            pages,
+            next_page,
+            total_users: total,
+            users: (users.length) ? users : ['the post list is empty']
         });
     } catch (error) {
         res.status(500).json({
@@ -17,7 +34,8 @@ const getAllUsers = async (req, res) => {
 const getUserWithId = async (req, res) => {
     try {
         const { id } = req.params;
-        const user = await User.findById(id).populate('roles', { name: 1, _id: 0 });
+        const user = await User.findById(id, { name: 1, surname: 1, img_avatar: 1 }).populate('roles', { name: 1, _id: 0 });
+
         if (!user) {
             res.status(400).json({
                 error: `user with id: ${id} not exist`
