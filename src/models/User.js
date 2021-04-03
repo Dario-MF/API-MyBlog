@@ -1,5 +1,6 @@
 const { Schema, model } = require('mongoose');
 const bcrypt = require('bcryptjs');
+const md5 = require('md5');
 require('dotenv').config();
 
 
@@ -50,8 +51,6 @@ const userSchema = new Schema({
     versionKey: false
 });
 
-
-
 // Encrypt password
 userSchema.statics.ecryptPassword = async (password) => {
     const salt = await bcrypt.genSalt(10);
@@ -63,13 +62,16 @@ userSchema.statics.comparePassword = async (password, receivedPassword) => {
     return await bcrypt.compare(password, receivedPassword);
 };
 
-// Parsing for all response, not password and rename _id
+// Parsing for all response json.
 userSchema.methods.toJSON = function () {
-    const { password, _id, ...user } = this.toObject();
-    user.posts = `${process.env.PATH_API}/posts?author=${_id}?page=1`
+    const { password, _id, img_avatar, ...user } = this.toObject();
+    user.img_avatar = (img_avatar) ? img_avatar : `https://gravatar.com/avatar/${_id}?d=retro`;
+    user.posts = `${process.env.PATH_API}/posts?author=${_id}?page=1`;
     user.uid = _id;
     return user;
 };
+
+
 
 
 
