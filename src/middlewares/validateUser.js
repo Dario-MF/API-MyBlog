@@ -11,7 +11,7 @@ const isUserEmail = async (email = '') => {
     };
 };
 
-// validar si el uid existe en la DB.
+// validar si el uid del token existe en la DB.
 const isUserId = async (req, res, next) => {
     const uid = req.uid;
     const user = await User.findById(uid);
@@ -21,10 +21,25 @@ const isUserId = async (req, res, next) => {
         });
     } else if (!user.state) {
         return res.status(400).json({
-            msg: 'User banned'
+            msg: 'User banned or deleted'
         });
     };
     req.user = user;
+    next();
+};
+
+const isUserIdParam = async (req, res, next) => {
+    const { author } = req.query.author;
+    const user = await User.findById(author);
+    if (!user) {
+        return res.status(404).json({
+            msg: 'User not found'
+        });
+    } else if (!user.state) {
+        return res.status(400).json({
+            msg: 'User banned or deleted'
+        });
+    };
     next();
 };
 
@@ -36,7 +51,7 @@ const isOwnerUser = async (req, res, next) => {
         const paramUser = await User.findById(paramId);
         if (!paramUser) {
             return res.status(400).json({
-                error: 'id user invalid'
+                error: 'User not found'
             });
         };
         const userRoles = await Role.find({ _id: { $in: roles } });
@@ -79,6 +94,7 @@ const checkPassword = (password = null) => {
 module.exports = {
     isUserEmail,
     isUserId,
+    isUserIdParam,
     isOwnerUser,
     checkPassword
 };

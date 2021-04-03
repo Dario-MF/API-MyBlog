@@ -6,15 +6,19 @@ GET http://localhost:3000/api/users?page=1
 GET http://localhost:3000/api/users/6062685fa2ce3a0b74948bd5
 
 ###
-PUT http://localhost:3000/api/users/6062685fa2ce3a0b74948bd5
+PUT http://localhost:3000/api/users/60679ca961415b353c7cff06
 Content-Type: application/json
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MDYyNjdmY2EyY2UzYTBiNzQ5NDhiZDIiLCJpYXQiOjE2MTczODU4NTUsImV4cCI6MTYxNzQ3MjI1NX0.-tEHZd-DOkRsJDOzodJbAOF4EnbmcodYfK5M1EXsn4A
 
 {
-    "name": "Test4",
+    "name": "Test14",
     "surname": "Test Test",
-    "email": "test4@test.com",
+    "email": "test14@test.com",
     "roles": ["USER_ROLE"],
     "newPassword": "password1",
     "oldPassword": "password1"
 }
+
+###
+DELETE  http://localhost:3000/api/users/6062685fa2ce3a0b74948bd5
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MDYyNjdmY2EyY2UzYTBiNzQ5NDhiZDIiLCJpYXQiOjE2MTczODU4NTUsImV4cCI6MTYxNzQ3MjI1NX0.-tEHZd-DOkRsJDOzodJbAOF4EnbmcodYfK5M1EXsn4A

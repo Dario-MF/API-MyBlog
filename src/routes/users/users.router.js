@@ -22,10 +22,6 @@ router.put('/:id', [
     check('id')
         .isMongoId()
         .withMessage('Not is id valid'),
-    validateToken,
-    validateUser.isUserId,
-    validateUser.isOwnerUser,
-    validateRol.updateRole,
     check('name')
         .notEmpty()
         .withMessage('name is required')
@@ -45,8 +41,12 @@ router.put('/:id', [
         .withMessage("email can contain max 30 characters"),
     check('newPassword')
         .custom(validateUser.checkPassword)
-        .withMessage('password can contain min 6, max 20 characters and one number'),
-    validateErrors
+        .withMessage('the password must contain a minimum of 6, a maximum of 20 characters and a number'),
+    validateErrors,
+    validateToken,
+    validateUser.isUserId,
+    validateUser.isOwnerUser,
+    validateRol.updateRole,
 ], updateUser);
 
 
@@ -55,10 +55,10 @@ router.delete('/:id', [
     check('id')
         .isMongoId()
         .withMessage('No es id valido'),
+    validateErrors,
     validateToken,
     validateUser.isUserId,
     validateUser.isOwnerUser,
-    validateErrors
 ], deleteUser);
 
 

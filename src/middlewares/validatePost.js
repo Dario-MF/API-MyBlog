@@ -2,12 +2,15 @@ const Post = require('../models/Post');
 const Role = require('../models/Role');
 
 
-const isIdValidPost = async (id = '') => {
+const isIdValidPost = async (req, res, next) => {
+    const { id } = req.params;
     const idValid = await Post.findById(id);
     if (!idValid) {
-        throw new Error('id invalid');
+        return res.status(400).json({
+            error: 'id post invalid'
+        });
     };
-    return;
+    next();
 };
 
 // Validar si el usuario es dueño del post o tine rol con permisos

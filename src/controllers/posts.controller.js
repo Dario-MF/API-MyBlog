@@ -1,19 +1,40 @@
 const { paginatePosts, authorPosts } = require('../libs/querysPost');
 const Post = require('../models/Post');
+const User = require('../models/User')
 
 
 
 const getAllPosts = async (req, res) => {
     const page = Number(req.query.page) || 1;
+    const { author } = req.query;
     try {
         let data;
-        if (req.query.author) {
+        if (author) {
+            // Validar is mongo id.
+            if (!author.match(/^[a-fA-F0-9]{24}$/)) {
+                return res.status(400).json({
+                    error: 'Id invalid',
+                });
+            };
+            const authorData = await User.findById(author, { name: 1, surname: 1, img: 1 });
+            // Validar id exist.
+            if (!authorData) {
+                return res.status(400).json({
+                    error: 'Id invalid',
+                });
+            }
             // busqueda por author y pagina.
-            data = await authorPosts(req.query.author, page);
+            data = await authorPosts(author, page);
+            data.author = authorData;
         } else {
             // busqueda normal por pagina.
             data = await paginatePosts(page);
         };
+        if (data.page > data.pages) {
+            return res.status(400).json({
+                error: `page param max: ${data.pages}`,
+            })
+        }
         res.status(200).json({
             msg: 'get posts OK',
             data
@@ -49,6 +70,7 @@ const createPost = async (req, res) => {
     const { _id } = req.user;
     try {
         const newPost = await Post.create({ author: _id, title, subtitle, img_path, article });
+        await newPost.populate('author', { _id: 0, name: 1, surname: 1, img: 1 }).execPopulate();
         res.status(200).json({
             msg: 'post created: OK',
             newPost
@@ -67,6 +89,7 @@ const updatePost = async (req, res) => {
     const { id } = req.params;
     try {
         const post = await Post.findByIdAndUpdate(id, { title, subtitle, img_path, article }, { new: true });
+        await post.populate('author', { _id: 0, name: 1, surname: 1, img: 1 }).execPopulate();
         res.status(200).json({
             msg: 'post updated: OK',
             post
@@ -85,8 +108,7 @@ const deletePost = async (req, res) => {
     try {
         const post = await Post.findByIdAndDelete(id);
         res.status(200).json({
-            msg: 'post deleted OK',
-            post
+            msg: 'post deleted OK'
         });
     } catch (error) {
         res.status(500).json({

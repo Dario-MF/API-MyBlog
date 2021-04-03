@@ -1,5 +1,4 @@
 const Post = require("../models/Post");
-const User = require("../models/User");
 
 
 // Busqueda de post por pagina.
@@ -14,26 +13,24 @@ const paginatePosts = async (page) => {
             .populate('author', { name: 1, surname: 1, img: 1 })
     ]);
     const pages = Math.ceil(total / perPage);// Calculo paginas totales.
-    const next_page = (page == pages)
-        ? 'No more pages'
+    const next_page = (page >= pages)
+        ? null
         : `${process.env.PATH_API}/posts?page=${page + 1}`
+    const prev_page = (page <= pages && page > 1)
+        ? `${process.env.PATH_API}/posts?page=${page - 1}`
+        : null
+
     return {
-        page,
+        page: (pages == 0) ? 0 : page,
         pages,
         next_page,
+        prev_page,
         total_posts: total,
         posts: (posts.length) ? posts : ['the post list is empty']
     };
 };
 // Busqueda de post por author y pagina
 const authorPosts = async (authorId, page) => {
-    const userExist = await User.findById(authorId, { name: 1, surname: 1, img_avatar: 1 });
-    if (!userExist) {
-        res.status(400).json({
-            error: 'id author no is user id'
-        });
-        return
-    };
     const perPage = 9;
     const [total, posts] = await Promise.all([
         Post.countDocuments({ author: authorId }),
@@ -44,15 +41,18 @@ const authorPosts = async (authorId, page) => {
     ]);
     const pages = Math.ceil(total / perPage);// Calculo paginas totales.
     const next_page = (page >= pages)
-        ? 'No more pages'
-        : `${process.env.PATH_API}/posts?author=${authorId}&page=${page + 1}`
+        ? null
+        : `${process.env.PATH_API}/posts?page=${page + 1}`
+    const prev_page = (page <= pages && page > 1)
+        ? `${process.env.PATH_API}/posts?page=${page - 1}`
+        : null
     return {
-        page,
+        page: (pages == 0) ? 0 : page,
         pages,
         next_page,
+        prev_page,
         total_posts: total,
-        posts: (posts.length) ? posts : ['the post list is empty'],
-        author: userExist
+        posts: (posts.length) ? posts : ['the post list is empty']
     };
 };
 

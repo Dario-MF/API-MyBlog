@@ -10,16 +10,13 @@ router.get('/', getAllPosts);
 router.get('/:id', [
     check('id')
         .isMongoId()
-        .withMessage('No es id valido')
-        .custom(validatePost.isIdValidPost),
-    validateErrors
+        .withMessage('No is id valid'),
+    validateErrors,
+    validatePost.isIdValidPost
 ], getPostById);
 
 
 router.post('/', [
-    validateToken,
-    validateUser.isUserId,
-    validateRol.authenticateRole(['USER_ROLE', 'MODERATOR_ROLE', 'ADMIN_ROLE']),
     check('title')
         .notEmpty()
         .withMessage('title is required')
@@ -35,19 +32,17 @@ router.post('/', [
         .withMessage('article is required')
         .isLength({ max: 2800 })
         .withMessage('The value specified article exceeds the maximum field length 2800'),
-    validateErrors
+    validateErrors,
+    validateToken,
+    validateUser.isUserId,
+    validateRol.authenticateRole(['USER_ROLE', 'MODERATOR_ROLE', 'ADMIN_ROLE']),
 ], createPost);
 
 
 router.put('/:id', [
-    validateToken,
-    validateUser.isUserId,
-    validateRol.authenticateRole(['USER_ROLE', 'MODERATOR_ROLE', 'ADMIN_ROLE']),
-    validatePost.isAuthorPost,
     check('id')
         .isMongoId()
-        .withMessage('No es id valido')
-        .custom(validatePost.isIdValidPost),
+        .withMessage('No is id valid'),
     check('title')
         .notEmpty()
         .withMessage('title is required')
@@ -63,20 +58,25 @@ router.put('/:id', [
         .withMessage('article is required')
         .isLength({ max: 2800 })
         .withMessage('The value specified article exceeds the maximum field length 2800'),
-    validateErrors
-], updatePost);
-
-
-router.delete('/:id', [
+    validateErrors,
+    validatePost.isIdValidPost,
     validateToken,
     validateUser.isUserId,
     validateRol.authenticateRole(['USER_ROLE', 'MODERATOR_ROLE', 'ADMIN_ROLE']),
     validatePost.isAuthorPost,
+], updatePost);
+
+
+router.delete('/:id', [
     check('id')
         .isMongoId()
-        .withMessage('No es id valido')
-        .custom(validatePost.isIdValidPost),
-    validateErrors
+        .withMessage('No is id valid'),
+    validateErrors,
+    validatePost.isIdValidPost,
+    validateToken,
+    validateUser.isUserId,
+    validateRol.authenticateRole(['USER_ROLE', 'MODERATOR_ROLE', 'ADMIN_ROLE']),
+    validatePost.isAuthorPost,
 ], deletePost);
 
 

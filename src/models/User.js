@@ -66,7 +66,7 @@ userSchema.statics.comparePassword = async (password, receivedPassword) => {
 // Parsing for all response, not password and rename _id
 userSchema.methods.toJSON = function () {
     const { password, _id, ...user } = this.toObject();
-    user.posts = `${process.env.PATH_API}/posts?author=${_id}`
+    user.posts = `${process.env.PATH_API}/posts?author=${_id}?page=1`
     user.uid = _id;
     return user;
 };
