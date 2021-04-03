@@ -1,39 +1,44 @@
-admin eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MDYyNjdmY2EyY2UzYTBiNzQ5NDhiZDIiLCJpYXQiOjE2MTcyMzE3OTksImV4cCI6MTYxNzMxODE5OX0.sSc2zGgecN56WJgbU8zenyqlnMfZb14CAKGxHKf8KhU
-
 //////////////////////////////---- POSTS ROUTES-----\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
 ###
+//Buscar posts por pagina.
 GET http://localhost:3000/api/posts?page=2
 
 ###
-GET http://localhost:3000/api/posts?author=606746abb5125804e0550e5e&page=1
+// Buscar posts por author id y/o pagina.
+GET http://localhost:3000/api/posts?author=6068d2e0815245211c5f2428&page=1
 
 ###
+// Buscar por id del post.
 GET http://localhost:3000/api/posts/6067c7a4fa510c22c00579c7
 
 ###
+// Crear post, minimo rango usuario registrado.
 POST http://localhost:3000/api/posts 
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MDY3NDZhYmI1MTI1ODA0ZTA1NTBlNWUiLCJpYXQiOjE2MTczODEwMzUsImV4cCI6MTYxNzQ2NzQzNX0.MPIFdgKHOQKFQCK2-gS-VSYkJP2RGeHLxMCfh_Wdnkg
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MDYyNjdmY2EyY2UzYTBiNzQ5NDhiZDIiLCJpYXQiOjE2MTc0ODkxMTcsImV4cCI6MTYxNzU3NTUxN30.ht7mf3hfhGVWJjxz94Mul21D9jRe2iE131qWQpamB4A
 
 {
     "title": "Titulo de prueba 23:00",
     "subtitle": "Subtitulo de prueba",
     "img_path": "https://picsum.photos/800/300",
-    "article": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quia, veniam molestias magni saepe eligendi natus? Odit, consequatur sed minima error aliquid alias illo unde cupiditate distinctio autem aliquam architecto reprehenderit!"
+    "article": "articleID.md"
 }
 
 ###
+// Modificar post, restringido para author o rango administrador/moderador.
 PUT http://localhost:3000/api/posts/60677056917ef436b8a004d6
 Content-Type: application/json
-Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MDY3NDZhYmI1MTI1ODA0ZTA1NTBlNWUiLCJpYXQiOjE2MTczODEwMzUsImV4cCI6MTYxNzQ2NzQzNX0.MPIFdgKHOQKFQCK2-gS-VSYkJP2RGeHLxMCfh_Wdnkg
+Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MDYyNjdmY2EyY2UzYTBiNzQ5NDhiZDIiLCJpYXQiOjE2MTc0ODkxMTcsImV4cCI6MTYxNzU3NTUxN30.ht7mf3hfhGVWJjxz94Mul21D9jRe2iE131qWQpamB4A
 
 {
     "title": "Titulo de prueba 2",
     "subtitle": "Subtitulo de prueba editado2",
     "img_path": "https://picsum.photos/800/300",
-    "article": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quia, veniam molestias magni saepe eligendi natus? Odit, consequatur sed minima error aliquid alias illo unde cupiditate distinctio autem aliquam architecto reprehenderit!"
+    "article": "articleID.md"
 }
 
 ###
+// Eliminar post, restringido para author o rango administrador/moderador.
 DELETE http://localhost:3000/api/posts/60677056917ef436b8a004d8
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MDY3NDZhYmI1MTI1ODA0ZTA1NTBlNWUiLCJpYXQiOjE2MTczODEwMzUsImV4cCI6MTYxNzQ2NzQzNX0.MPIFdgKHOQKFQCK2-gS-VSYkJP2RGeHLxMCfh_Wdnkg

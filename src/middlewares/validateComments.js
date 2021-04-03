@@ -1,27 +1,27 @@
-const Post = require('../models/Post');
+const Comment = require('../models/Comment');
 const Role = require('../models/Role');
 
 
-const isIdValidPost = async (req, res, next) => {
+const isCommentId = async (req, res, next) => {
     const { id } = req.params;
-    const idValid = await Post.findById(id);
+    const idValid = await Comment.findById(id);
     if (!idValid) {
         return res.status(400).json({
-            error: 'id post invalid'
+            error: 'id comment no exist'
         });
     };
     next();
 };
 
-// Validar si el usuario es dueño del post o tine rol con permisos.
-const isAuthorPost = async (req, res, next) => {
+// Validar si el usuario es dueño del commentario o tine rol con permisos.
+const isAuthorComment = async (req, res, next) => {
     try {
         const { _id, roles } = req.user;
-        const postId = req.params.id;
-        const post = await Post.findById(postId);
-        if (!post) {
+        const commentId = req.params.id;
+        const comment = await Comment.findById(commentId);
+        if (!comment) {
             return res.status(400).json({
-                error: 'id post invalid'
+                error: 'id comment no exist'
             });
         };
         const userRoles = await Role.find({ _id: { $in: roles } });
@@ -45,7 +45,9 @@ const isAuthorPost = async (req, res, next) => {
     };
 };
 
+
+
 module.exports = {
-    isIdValidPost,
-    isAuthorPost
+    isCommentId,
+    isAuthorComment
 };

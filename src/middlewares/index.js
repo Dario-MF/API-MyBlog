@@ -3,5 +3,6 @@ module.exports = {
     validateRol: require('./validateRole'),
     validateToken: require('./validateToken'),
     validateUser: require('./validateUser'),
-    validatePost: require('./validatePost')
+    validatePost: require('./validatePost'),
+    validateComments: require('./validateComments')
 };

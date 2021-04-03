@@ -35,7 +35,7 @@ router.post('/', [
     validateErrors,
     validateToken,
     validateUser.isUserId,
-    validateRol.authenticateRole(['USER_ROLE', 'MODERATOR_ROLE', 'ADMIN_ROLE']),
+    validateRol.authenticateRole(['USER_ROLE', 'MODERATOR_ROLE', 'ADMIN_ROLE'])
 ], createPost);
 
 

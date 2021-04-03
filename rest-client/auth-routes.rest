@@ -1,21 +1,23 @@
 ///////////////////////---- AUTH ROUTES-----\\\\\\\\\\\\\\\\\\\\\\\\
 ###
+// Registrarse, rol usuario maximo admitido.
 POST http://localhost:3000/api/auth/signup
 Content-Type: application/json
 
 {
-    "name": "Test14",
+    "name": "Test4",
     "surname": "Test Test",
-    "email": "test15@test.com",
+    "email": "test4@test.com",
     "roles": ["USER_ROLE"],
     "password": "password1"
 }
 
 ###
+// Loguearse.
 POST http://localhost:3000/api/auth/signin
 Content-Type: application/json
 
 {
-    "email": "test15@test.com",
+    "email": "test1@test.com",
     "password": "password1"
 }

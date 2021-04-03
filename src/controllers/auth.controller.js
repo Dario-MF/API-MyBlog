@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
+const md5 = require('md5');
 
 
 const signUp = async (req, res) => {
@@ -8,7 +9,7 @@ const signUp = async (req, res) => {
         name,
         surname,
         email,
-        img_avatar,
+        img_avatar: (img_avatar) ? img_avatar : md5(email),
         roles: idRoles,
         password: await User.ecryptPassword(password)
     });
@@ -48,7 +49,6 @@ const signIn = async (req, res) => {
     const token = jwt.sign({ uid: user._id }, process.env.SECRET_JWT, {
         expiresIn: 86400
     });
-
     res.status(200).json({
         msg: 'Signin correct',
         token

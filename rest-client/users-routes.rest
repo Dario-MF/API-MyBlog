@@ -1,11 +1,14 @@
 ///////////////////////---- USERS ROUTES-----\\\\\\\\\\\\\\\\\\\\\\\\
 ###
-GET http://localhost:3000/api/users?page=1
+// Buscar usuarios por pagina (ruta abierta información de usuario limitada)
+GET http://localhost:3000/api/users?page=2
 
 ###
-GET http://localhost:3000/api/users/6062685fa2ce3a0b74948bd5
+// Buscar usuario por ID (ruta abierta información de usuario limitada)
+GET http://localhost:3000/api/users/60679ca961415b353c7cff06
 
 ###
+// Actualizar usuario, restringido a dueño de la cuenta o rango Administrador(modificar rol, solo administrador).
 PUT http://localhost:3000/api/users/60679ca961415b353c7cff06
 Content-Type: application/json
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MDYyNjdmY2EyY2UzYTBiNzQ5NDhiZDIiLCJpYXQiOjE2MTczODU4NTUsImV4cCI6MTYxNzQ3MjI1NX0.-tEHZd-DOkRsJDOzodJbAOF4EnbmcodYfK5M1EXsn4A
@@ -20,5 +23,6 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MDYyNjdmY2EyY2Uz
 }
 
 ###
+// Elimnar Usuario, pasa a estado false, restringido a dueño de la cuenta o rango Administrador.
 DELETE  http://localhost:3000/api/users/6062685fa2ce3a0b74948bd5
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MDYyNjdmY2EyY2UzYTBiNzQ5NDhiZDIiLCJpYXQiOjE2MTczODU4NTUsImV4cCI6MTYxNzQ3MjI1NX0.-tEHZd-DOkRsJDOzodJbAOF4EnbmcodYfK5M1EXsn4A
