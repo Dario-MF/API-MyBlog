@@ -1,8 +1,8 @@
 ///////////////////////---- COMMENTS ROUTES-----\\\\\\\\\\\\\\\\\\\\\\\\
 
 ###
-// Buscar comentarios por post ID.
-GET http://localhost:3000/api/comments/6068ed240310de1f5cc72aa3
+// Buscar comentarios por post ID y paginación.
+GET http://localhost:3000/api/comments/6068ed240310de1f5cc72aa3?page=1
 
 ###
 // Crear comentario enlazando post y author, ruta restringida a minimo usuario.
