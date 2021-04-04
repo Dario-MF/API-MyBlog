@@ -1,17 +1,18 @@
 const Comment = require('../models/Comment');
-const Post = require('../models/Post');
-const User = require('../models/User');
+const { paginateComments } = require('../libs/querysComments');
 
 
 // Buscar comentarios por Id del post.
 const getCommentsPostId = async (req, res) => {
+    const { id } = req.params;
+    const page = Number(req.query.page) || 1;
     try {
-        const { id } = req.params;
-        const comments = await Comment.find({ post: id }).populate('author', { _id: 0, name: 1, surname: 1 });
+        const data = await paginateComments(page, id);
+        //const comments = await Comment.find({ post: id }).populate('author', { _id: 0, name: 1, surname: 1 });
 
         res.status(200).json({
             msg: 'response OK',
-            data: comments
+            data
         });
     } catch (error) {
         res.status(500).json({

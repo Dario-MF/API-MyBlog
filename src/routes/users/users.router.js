@@ -13,7 +13,8 @@ router.get('/:id', [
     check('id')
         .isMongoId()
         .withMessage('No es id valido'),
-    validateErrors
+    validateErrors,
+    validateUser.isUserIdParam,
 ], getUserWithId);
 
 
@@ -44,7 +45,8 @@ router.put('/:id', [
         .withMessage('the password must contain a minimum of 6, a maximum of 20 characters and a number'),
     validateErrors,
     validateToken,
-    validateUser.isUserId,
+    validateUser.isUserIdToken,
+    validateUser.isUserIdParam,
     validateUser.isOwnerUser,
     validateRol.updateRole,
 ], updateUser);
@@ -57,7 +59,8 @@ router.delete('/:id', [
         .withMessage('No es id valido'),
     validateErrors,
     validateToken,
-    validateUser.isUserId,
+    validateUser.isUserIdToken,
+    validateUser.isUserIdParam,
     validateUser.isOwnerUser,
 ], deleteUser);
 

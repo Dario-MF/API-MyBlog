@@ -26,7 +26,7 @@ router.post('/:id', [
     validateErrors,
     validatePost.isIdValidPost,
     validateToken,
-    validateUser.isUserId,
+    validateUser.isUserIdToken,
     validateRol.authenticateRole(['USER_ROLE', 'MODERATOR_ROLE', 'ADMIN_ROLE']),
 ], commentCtrl.createComment);
 
@@ -43,7 +43,7 @@ router.put('/:id', [
     validateErrors,
     validateComments.isCommentId,
     validateToken,
-    validateUser.isUserId,
+    validateUser.isUserIdToken,
     validateRol.authenticateRole(['USER_ROLE', 'MODERATOR_ROLE', 'ADMIN_ROLE']),
     validateComments.isAuthorComment
 ], commentCtrl.updateComment);
@@ -56,7 +56,7 @@ router.delete('/:id', [
     validateErrors,
     validateComments.isCommentId,
     validateToken,
-    validateUser.isUserId,
+    validateUser.isUserIdToken,
     validateRol.authenticateRole(['USER_ROLE', 'MODERATOR_ROLE', 'ADMIN_ROLE']),
     validateComments.isAuthorComment
 ], commentCtrl.deleteComment);

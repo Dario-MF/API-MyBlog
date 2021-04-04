@@ -12,7 +12,7 @@ const isUserEmail = async (email = '') => {
 };
 
 // validar si el uid del token existe en la DB.
-const isUserId = async (req, res, next) => {
+const isUserIdToken = async (req, res, next) => {
     const uid = req.uid;
     const user = await User.findById(uid);
     if (!user) {
@@ -29,8 +29,8 @@ const isUserId = async (req, res, next) => {
 };
 
 const isUserIdParam = async (req, res, next) => {
-    const { author } = req.query.author;
-    const user = await User.findById(author);
+    const { id } = req.params;
+    const user = await User.findById(id);
     if (!user) {
         return res.status(404).json({
             msg: 'User not found'
@@ -93,7 +93,7 @@ const checkPassword = (password = null) => {
 
 module.exports = {
     isUserEmail,
-    isUserId,
+    isUserIdToken,
     isUserIdParam,
     isOwnerUser,
     checkPassword

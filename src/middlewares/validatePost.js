@@ -3,7 +3,7 @@ const Role = require('../models/Role');
 const User = require('../models/User');
 
 
-const isIdValidParams = async (req, res, next) => {
+const isIdValidQuery = async (req, res, next) => {
     try {
         const { author } = req.query;
         if (author) {
@@ -80,7 +80,7 @@ const isAuthorPost = async (req, res, next) => {
 };
 
 module.exports = {
-    isIdValidParams,
+    isIdValidQuery,
     isIdValidPost,
     isAuthorPost
 };

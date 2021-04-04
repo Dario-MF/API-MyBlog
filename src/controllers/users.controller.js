@@ -1,28 +1,13 @@
 const User = require('../models/User');
+const { paginateUsers } = require('../libs/querysUsers');
 
 const getAllUsers = async (req, res) => {
     const page = Number(req.query.page) || 1;
     try {
-        const perPage = 9;
-        const [total, users] = await Promise.all([
-            User.countDocuments(),
-            User.find({ state: true }, { name: 1, surname: 1, img_avatar: 1 })
-                .sort({ 'updatedAt': -1 })// Orden por fecha ascendiente.
-                .skip(perPage * page - perPage)//Calculo para paginación.
-                .limit(perPage)
-                .populate('roles', { name: 1, _id: 0 })
-        ]);
-        const pages = Math.ceil(total / perPage);// Calculo paginas totales.
-        const next_page = (page >= pages)
-            ? 'No more pages'
-            : `${process.env.PATH_API}/users?page=${page + 1}`
+        const data = await paginateUsers(page)
         res.status(200).json({
             msg: 'respuesta OK',
-            page,
-            pages,
-            next_page,
-            total_users: total,
-            users: (users.length) ? users : ['the post list is empty']
+            data
         });
     } catch (error) {
         res.status(500).json({
@@ -35,15 +20,6 @@ const getUserWithId = async (req, res) => {
     try {
         const { id } = req.params;
         const user = await User.findById(id, { name: 1, surname: 1, img_avatar: 1 }).populate('roles', { name: 1, _id: 0 });
-        if (!user) {
-            return res.status(404).json({
-                msg: 'User not found'
-            });
-        } else if (!user.state) {
-            return res.status(400).json({
-                msg: 'User banned or deleted'
-            });
-        };
         res.status(200).json({
             msg: 'respuesta OK',
             data: user
@@ -56,21 +32,10 @@ const getUserWithId = async (req, res) => {
 };
 
 const updateUser = async (req, res) => {
-    console.log('paso')
     const { name, surname, email, idRoles, img_avatar, newPassword, oldPassword } = req.body;
     const { id } = req.params;
     try {
-        // Validar usuario
         const user = await User.findById(id);
-        if (!user) {
-            return res.status(404).json({
-                msg: 'User not found'
-            });
-        } else if (!user.state) {
-            return res.status(400).json({
-                msg: 'User banned or deleted'
-            });
-        };
         // Validar password
         let msgPassword = 'password no updated';
         if (newPassword && oldPassword) {
@@ -119,7 +84,7 @@ const updateUser = async (req, res) => {
 const deleteUser = async (req, res) => {
     const { id } = req.params;
     try {
-        const deleted = await User.findByIdAndUpdate(id, { state: false }, { new: true });
+        await User.findByIdAndUpdate(id, { state: false }, { new: true });
         res.status(200).json({
             msg: 'user deleted'
         });

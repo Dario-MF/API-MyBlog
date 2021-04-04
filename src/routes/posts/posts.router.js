@@ -5,7 +5,7 @@ const { validateErrors, validatePost, validateToken, validateRol, validateUser }
 
 
 router.get('/', [
-    validatePost.isIdValidParams
+    validatePost.isIdValidQuery
 ], getAllPosts);
 
 
@@ -36,7 +36,7 @@ router.post('/', [
         .withMessage('The value specified article exceeds the maximum field length 2800'),
     validateErrors,
     validateToken,
-    validateUser.isUserId,
+    validateUser.isUserIdToken,
     validateRol.authenticateRole(['USER_ROLE', 'MODERATOR_ROLE', 'ADMIN_ROLE'])
 ], createPost);
 
@@ -63,7 +63,7 @@ router.put('/:id', [
     validateErrors,
     validatePost.isIdValidPost,
     validateToken,
-    validateUser.isUserId,
+    validateUser.isUserIdToken,
     validateRol.authenticateRole(['USER_ROLE', 'MODERATOR_ROLE', 'ADMIN_ROLE']),
     validatePost.isAuthorPost,
 ], updatePost);
@@ -76,7 +76,7 @@ router.delete('/:id', [
     validateErrors,
     validatePost.isIdValidPost,
     validateToken,
-    validateUser.isUserId,
+    validateUser.isUserIdToken,
     validateRol.authenticateRole(['USER_ROLE', 'MODERATOR_ROLE', 'ADMIN_ROLE']),
     validatePost.isAuthorPost,
 ], deletePost);
