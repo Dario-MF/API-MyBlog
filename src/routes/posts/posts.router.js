@@ -4,7 +4,9 @@ const { getAllPosts, getPostById, createPost, updatePost, deletePost } = require
 const { validateErrors, validatePost, validateToken, validateRol, validateUser } = require('../../middlewares');
 
 
-router.get('/', getAllPosts);
+router.get('/', [
+    validatePost.isIdValidParams
+], getAllPosts);
 
 
 router.get('/:id', [

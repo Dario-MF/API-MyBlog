@@ -10,22 +10,9 @@ const getAllPosts = async (req, res) => {
     try {
         let data;
         if (author) {
-            // Validar is mongo id.
-            if (!author.match(/^[a-fA-F0-9]{24}$/)) {
-                return res.status(400).json({
-                    error: 'Id invalid',
-                });
-            };
-            const authorData = await User.findById(author, { name: 1, surname: 1 });
-            // Validar id exist.
-            if (!authorData) {
-                return res.status(400).json({
-                    error: 'Id invalid',
-                });
-            }
             // busqueda por author y pagina.
             data = await authorPosts(author, page);
-            data.author = authorData;
+            data.author = req.author;
         } else {
             // busqueda normal por pagina.
             data = await paginatePosts(page);

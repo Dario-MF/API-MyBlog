@@ -2,15 +2,15 @@
 
 ###
 //Buscar posts por pagina.
-GET http://localhost:3000/api/posts?page=2
+GET http://localhost:3000/api/posts?page=1
 
 ###
 // Buscar posts por author id y/o pagina.
-GET http://localhost:3000/api/posts?author=6068d2e0815245211c5f2428&page=1
+GET http://localhost:3000/api/posts?author=606267fca2ce3a0b74948bd2&page=2
 
 ###
 // Buscar por id del post.
-GET http://localhost:3000/api/posts/6067c7a4fa510c22c00579c7
+GET http://localhost:3000/api/posts/606903c5ce874c2caceefbc4
 
 ###
 // Crear post, minimo rango usuario registrado.
@@ -27,7 +27,7 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MDYyNjdmY2EyY2Uz
 
 ###
 // Modificar post, restringido para author o rango administrador/moderador.
-PUT http://localhost:3000/api/posts/60677056917ef436b8a004d6
+PUT http://localhost:3000/api/posts/606903c5ce874c2caceefbc7
 Content-Type: application/json
 Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MDYyNjdmY2EyY2UzYTBiNzQ5NDhiZDIiLCJpYXQiOjE2MTc0ODkxMTcsImV4cCI6MTYxNzU3NTUxN30.ht7mf3hfhGVWJjxz94Mul21D9jRe2iE131qWQpamB4A
 
