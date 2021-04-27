@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const morgan = require('morgan');
 
 const apiRouter = require('./routes/api.router');
@@ -9,6 +10,8 @@ const app = express();
 app.set('port', process.env.PORT || 3000);
 
 //Middlewares
+app.use(cors());
+app.options('*', cors());
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

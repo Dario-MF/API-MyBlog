@@ -3,6 +3,26 @@ const User = require('../models/User');
 const md5 = require('md5');
 
 
+const refresh = async(req, res) => {
+    try {
+        const user = req.user;
+        // Grabar token
+        const token = jwt.sign({ uid: user._id }, process.env.SECRET_JWT, {
+            expiresIn: 86400
+        });
+        res.status(200).json({
+            msg: 'refresh correct',
+            token,
+            user
+        });
+    } catch (error) {
+        res.status(500).json({
+            error: 'error in server',
+            error
+        });
+    };
+};
+
 const signUp = async (req, res) => {
     try {
         const { name, surname, email, img_avatar, password, idRoles } = req.body;
@@ -74,5 +94,6 @@ const signIn = async (req, res) => {
 
 module.exports = {
     signUp,
-    signIn
+    signIn,
+    refresh
 };

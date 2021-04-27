@@ -14,10 +14,15 @@ Content-Type: application/json
 
 ###
 // Loguearse.
-POST http://localhost:3000/api/auth/signin
+POST http://localhost:8000/api/auth/signin
 Content-Type: application/json
 
 {
     "email": "test1@test.com",
     "password": "password1"
 }
+
+###
+// Refresh del token.
+GET  http://localhost:8000/api/auth/refresh
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MDYzNGRlNzg5ZWY3ZTFlNTgyZDk5MWMiLCJpYXQiOjE2MTk1Mzc4MjIsImV4cCI6MTYxOTYyNDIyMn0.Aw7glcJ29OG6Sd6GoapaHVaF2udLn8pOxHeniuOsQRQ

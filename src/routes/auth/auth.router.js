@@ -1,7 +1,17 @@
 const router = require('express').Router();
 const { check } = require('express-validator');
-const { validateErrors, validateRol, validateUser } = require('../../middlewares');
-const { signUp, signIn } = require('../../controllers/auth.controller');
+const { validateErrors, validateRol, validateUser, validateToken } = require('../../middlewares');
+const { signUp, signIn, refresh } = require('../../controllers/auth.controller');
+
+
+
+
+
+router.get('/refresh',[
+    validateToken,
+    validateUser.isUserIdToken,
+    validateRol.authenticateRole(['USER_ROLE', 'MODERATOR_ROLE', 'ADMIN_ROLE'])
+], refresh );
 
 
 router.post('/signup', [
