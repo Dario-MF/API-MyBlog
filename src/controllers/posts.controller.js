@@ -27,8 +27,7 @@ const getAllPosts = async (req, res) => {
         });
     } catch (error) {
         res.status(500).json({
-            error: 'error en el servidor',
-            error
+            error: 'error en el servidor'
         });
     };
 };
@@ -43,8 +42,7 @@ const getPostById = async (req, res) => {
         });
     } catch (error) {
         res.status(500).json({
-            error: 'error en el servidor',
-            error
+            error: 'error en el servidor'
         });
     };
 
@@ -65,8 +63,7 @@ const createPost = async (req, res) => {
         });
     } catch (error) {
         res.status(500).json({
-            error: 'error en el servidor',
-            error
+            error: 'error en el servidor'
         });
     };
 };
@@ -86,8 +83,7 @@ const updatePost = async (req, res) => {
         });
     } catch (error) {
         res.status(500).json({
-            error: 'error en el servidor',
-            error
+            error: 'error en el servidor'
         });
     };
 };
@@ -102,8 +98,7 @@ const deletePost = async (req, res) => {
         });
     } catch (error) {
         res.status(500).json({
-            error: 'error en el servidor',
-            error
+            error: 'error en el servidor'
         });
     };
 };

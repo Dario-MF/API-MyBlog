@@ -29,7 +29,9 @@ const actualizarImgCloudinary = async (req, res) => {
                 break;
 
             default:
-                res.status(500).json({ error: 'coleccion no contemplada' })
+                res.status(500).json({ 
+                    error: 'coleccion no contemplada' 
+                })
                 break;
         };
         if (modelo.img) {

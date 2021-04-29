@@ -18,7 +18,6 @@ const refresh = async (req, res) => {
     } catch (error) {
         res.status(500).json({
             error: 'error in server',
-            error
         });
     };
 };
@@ -46,7 +45,6 @@ const signUp = async (req, res) => {
     } catch (error) {
         res.status(500).json({
             error: 'error in server',
-            error
         });
     };
 };
@@ -59,19 +57,19 @@ const signIn = async (req, res) => {
         const user = await User.findOne({ email });
         if (!user) {
             return res.status(400).json({
-                msg: 'email or password incorrect'
+                error: 'email or password incorrect'
             });
         }
         if (!user.state) {
             return res.status(400).json({
-                msg: 'email or password incorrect'
+                error: 'email or password incorrect'
             });
         }
         // validar password.
         const validPassword = await User.comparePassword(password, user.password);
         if (!validPassword) {
             return res.status(400).json({
-                msg: 'email or password incorrect'
+                error: 'email or password incorrect'
             });
         };
         // Grabar token
@@ -86,7 +84,6 @@ const signIn = async (req, res) => {
     } catch (error) {
         res.status(500).json({
             error: 'error in server',
-            error
         });
     };
 };

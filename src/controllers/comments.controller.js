@@ -16,8 +16,7 @@ const getCommentsPostId = async (req, res) => {
         });
     } catch (error) {
         res.status(500).json({
-            error: 'error en el servidor',
-            error
+            error: 'error en el servidor'
         });
     };
 };
@@ -37,8 +36,7 @@ const createComment = async (req, res) => {
         });
     } catch (error) {
         res.status(500).json({
-            error: 'error en el servidor',
-            error
+            error: 'error en el servidor'
         });
     };
 };
@@ -57,8 +55,7 @@ const updateComment = async (req, res) => {
         });
     } catch (error) {
         res.status(500).json({
-            error: 'error en el servidor',
-            error
+            error: 'error en el servidor'
         });
     };
 };
@@ -74,8 +71,7 @@ const deleteComment = async (req, res) => {
         });
     } catch (error) {
         res.status(500).json({
-            error: 'error en el servidor',
-            error
+            error: 'error en el servidor'
         });
     };
 };

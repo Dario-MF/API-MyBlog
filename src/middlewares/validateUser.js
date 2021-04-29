@@ -17,11 +17,11 @@ const isUserIdToken = async (req, res, next) => {
     const user = await User.findById(uid);
     if (!user) {
         return res.status(404).json({
-            msg: 'User not found'
+            error: 'User not found'
         });
     } else if (!user.state) {
         return res.status(400).json({
-            msg: 'User banned or deleted'
+            error: 'User banned or deleted'
         });
     };
     req.user = user;
@@ -33,11 +33,11 @@ const isUserIdParam = async (req, res, next) => {
     const user = await User.findById(id);
     if (!user) {
         return res.status(404).json({
-            msg: 'User not found'
+            error: 'User not found'
         });
     } else if (!user.state) {
         return res.status(400).json({
-            msg: 'User banned or deleted'
+            error: 'User banned or deleted'
         });
     };
     next();

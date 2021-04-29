@@ -42,7 +42,7 @@ const updateUser = async (req, res) => {
             const validPassword = await User.comparePassword(oldPassword, user.password);
             if (!validPassword) {
                 return res.status(400).json({
-                    msg: 'email or password incorrect'
+                    error: 'email or password incorrect'
                 });
             };
             msgPassword = 'password updated successfully '
@@ -52,7 +52,7 @@ const updateUser = async (req, res) => {
             const emailExist = await User.findOne({ email });
             if (emailExist) {
                 return res.status(400).json({
-                    msg: 'email or password incorrect'
+                    error: 'email or password incorrect'
                 });
             };
         };
@@ -86,7 +86,7 @@ const deleteUser = async (req, res) => {
     try {
         await User.findByIdAndUpdate(id, { state: false }, { new: true });
         res.status(200).json({
-            msg: 'user deleted'
+            error: 'user deleted'
         });
     } catch (error) {
         res.status(500).json({
