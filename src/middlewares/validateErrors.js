@@ -9,7 +9,7 @@ const validateErrors = (req, res, next) => {
     const result = validationResult(req).formatWith(errorFormatter);
     if (!result.isEmpty()) {
         return res.status(400).json({
-            error: result
+            error: result.array()
         });
     };
     next();
