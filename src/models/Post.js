@@ -16,7 +16,7 @@ const postSchema = new Schema({
         trim: true,
         maxlength: [100, 'The subtitle is very long, max 100 words'],
     },
-    img_path: {
+    img: {
         type: String,
         trim: true,
         maxlength: [100, 'The path is very long, max 100 words'],

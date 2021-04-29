@@ -22,7 +22,7 @@ const userSchema = new Schema({
         trim: true,
         unique: true
     },
-    img_avatar: {
+    img: {
         type: String
     },
     password: {

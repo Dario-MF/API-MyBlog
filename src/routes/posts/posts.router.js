@@ -1,7 +1,8 @@
 const router = require('express').Router();
 const { check } = require('express-validator');
 const { getAllPosts, getPostById, createPost, updatePost, deletePost } = require('../../controllers/posts.controller');
-const { validateErrors, validatePost, validateToken, validateRol, validateUser } = require('../../middlewares');
+const { validateErrors, validatePost, validateToken, validateRol, validateUser, uploadClodinary } = require('../../middlewares');
+const { validarArchivoSubir } = require('../../middlewares/validateUpload');
 
 
 router.get('/', [
@@ -19,6 +20,8 @@ router.get('/:id', [
 
 
 router.post('/', [
+    validarArchivoSubir,
+    uploadClodinary.uploadImg,
     check('title')
         .notEmpty()
         .withMessage('title is required')

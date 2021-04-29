@@ -5,7 +5,7 @@ const paginateUsers = async (page) => {
         const perPage = 9;
         const [total, users] = await Promise.all([
             User.countDocuments(),
-            User.find({ state: true }, { name: 1, surname: 1, img_avatar: 1 })
+            User.find({ state: true }, { name: 1, surname: 1, img: 1 })
                 .sort({ 'updatedAt': -1 })// Orden por fecha ascendiente.
                 .skip(perPage * page - perPage)//Calculo para paginación.
                 .limit(perPage)

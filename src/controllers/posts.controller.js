@@ -1,6 +1,5 @@
 const { paginatePosts, authorPosts } = require('../libs/querysPost');
 const Post = require('../models/Post');
-const User = require('../models/User')
 
 
 
@@ -53,11 +52,13 @@ const getPostById = async (req, res) => {
 
 
 const createPost = async (req, res) => {
-    const { title, subtitle, img_path = '', article } = req.body;
+    const { title, subtitle, article } = req.body;
     const { _id } = req.user;
+    const img = req.img;
     try {
-        const newPost = await Post.create({ author: _id, title, subtitle, img_path, article });
+        const newPost = await Post.create({ author: _id, title, subtitle, img, article });
         await newPost.populate('author', { name: 1, surname: 1 }).execPopulate();
+
         res.status(200).json({
             msg: 'post created: OK',
             data: newPost
@@ -72,11 +73,13 @@ const createPost = async (req, res) => {
 
 
 const updatePost = async (req, res) => {
-    const { title, subtitle = '', img_path = '', article } = req.body;
+    const { title, subtitle = '', img, article } = req.body;
     const { id } = req.params;
+
     try {
-        const post = await Post.findByIdAndUpdate(id, { title, subtitle, img_path, article }, { new: true });
+        const post = await Post.findByIdAndUpdate(id, { title, subtitle, img, article }, { new: true });
         await post.populate('author', { name: 1, surname: 1 }).execPopulate();
+
         res.status(200).json({
             msg: 'post updated: OK',
             data: post

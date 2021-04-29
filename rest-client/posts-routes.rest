@@ -14,7 +14,7 @@ GET http://localhost:3000/api/posts/606903c5ce874c2caceefbc4
 
 ###
 // Crear post, minimo rango usuario registrado.
-POST http://localhost:3000/api/posts 
+POST http://localhost:8000/api/posts 
 Content-Type: application/json
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MDYyNjdmY2EyY2UzYTBiNzQ5NDhiZDIiLCJpYXQiOjE2MTc0ODkxMTcsImV4cCI6MTYxNzU3NTUxN30.ht7mf3hfhGVWJjxz94Mul21D9jRe2iE131qWQpamB4A
 

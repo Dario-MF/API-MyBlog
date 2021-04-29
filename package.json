@@ -11,11 +11,13 @@
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "cartoon-avatar": "^1.0.2",
+    "cloudinary": "^1.25.1",
     "colors": "^1.4.0",
     "cors": "^2.8.5",
     "dayjs": "^1.10.4",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "express-fileupload": "^1.2.1",
     "express-validator": "^6.10.0",
     "jsonwebtoken": "^8.5.1",
     "md5": "^2.3.0",

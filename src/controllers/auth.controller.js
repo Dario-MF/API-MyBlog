@@ -3,7 +3,7 @@ const User = require('../models/User');
 const md5 = require('md5');
 
 
-const refresh = async(req, res) => {
+const refresh = async (req, res) => {
     try {
         const user = req.user;
         // Grabar token
@@ -25,12 +25,12 @@ const refresh = async(req, res) => {
 
 const signUp = async (req, res) => {
     try {
-        const { name, surname, email, img_avatar, password, idRoles } = req.body;
+        const { name, surname, email, img, password, idRoles } = req.body;
         const newUser = new User({
             name,
             surname,
             email,
-            img_avatar: (img_avatar) ? img_avatar : md5(email),
+            img: (img) ? img : md5(email),
             roles: idRoles,
             password: await User.ecryptPassword(password)
         });

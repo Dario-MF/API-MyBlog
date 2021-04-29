@@ -1,4 +1,5 @@
 const express = require('express');
+const fileUpload = require('express-fileupload');
 const cors = require('cors');
 const morgan = require('morgan');
 
@@ -15,6 +16,11 @@ app.options('*', cors());
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(fileUpload({
+    useTempFiles: true,
+    tempFileDir: '/tmp/',
+    createParentPath: true
+}));
 
 // Router API
 app.use('/api', apiRouter);

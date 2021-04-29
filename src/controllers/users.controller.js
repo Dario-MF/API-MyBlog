@@ -19,7 +19,7 @@ const getAllUsers = async (req, res) => {
 const getUserWithId = async (req, res) => {
     try {
         const { id } = req.params;
-        const user = await User.findById(id, { name: 1, surname: 1, img_avatar: 1 }).populate('roles', { name: 1, _id: 0 });
+        const user = await User.findById(id, { name: 1, surname: 1, img: 1 }).populate('roles', { name: 1, _id: 0 });
         res.status(200).json({
             msg: 'respuesta OK',
             data: user
@@ -32,7 +32,7 @@ const getUserWithId = async (req, res) => {
 };
 
 const updateUser = async (req, res) => {
-    const { name, surname, email, idRoles, img_avatar, newPassword, oldPassword } = req.body;
+    const { name, surname, email, idRoles, img, newPassword, oldPassword } = req.body;
     const { id } = req.params;
     try {
         const user = await User.findById(id);
@@ -61,7 +61,7 @@ const updateUser = async (req, res) => {
             name: (name) ? name : user.name,
             surname: (surname) ? surname : user.surname,
             email: (email) ? email : user.email,
-            img_avatar: (img_avatar) ? img_avatar : user.img_avatar,
+            img: (img) ? img : user.img,
             roles: (idRoles) ? idRoles : user.roles,
             password: (newPassword && oldPassword) ? await User.ecryptPassword(newPassword) : user.password
         }, { new: true });

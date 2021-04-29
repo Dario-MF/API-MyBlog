@@ -4,5 +4,7 @@ module.exports = {
     validateToken: require('./validateToken'),
     validateUser: require('./validateUser'),
     validatePost: require('./validatePost'),
-    validateComments: require('./validateComments')
+    validateComments: require('./validateComments'),
+    validateUpload: require('./validateUpload'),
+    uploadClodinary: require('./uploadCloudynary')
 };
