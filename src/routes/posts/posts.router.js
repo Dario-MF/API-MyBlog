@@ -25,13 +25,13 @@ router.post('/', [
     check('title')
         .notEmpty()
         .withMessage('title is required')
-        .isLength({ max: 40 })
-        .withMessage('The value specified tilte exceeds the maximum field length 40'),
+        .isLength({ max: 150 })
+        .withMessage('The value specified tilte exceeds the maximum field length 150'),
     check('subtitle')
         .notEmpty()
         .withMessage('subtitle is required')
-        .isLength({ max: 100 })
-        .withMessage('The value specified subtilte exceeds the maximum field length 100'),
+        .isLength({ max: 150 })
+        .withMessage('The value specified subtilte exceeds the maximum field length 150'),
     check('article')
         .notEmpty()
         .withMessage('article is required'),

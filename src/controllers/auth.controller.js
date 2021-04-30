@@ -75,7 +75,7 @@ const signIn = async (req, res) => {
         // Grabar token
         const token = jwt.sign({ uid: user._id }, process.env.SECRET_JWT, {
             expiresIn: 86400
-        });
+        });   
         res.status(200).json({
             msg: 'Signin correct',
             token,
@@ -83,7 +83,7 @@ const signIn = async (req, res) => {
         });
     } catch (error) {
         res.status(500).json({
-            error: 'error in server',
+            error: 'error in server ctrl',
         });
     };
 };

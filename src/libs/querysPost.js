@@ -27,7 +27,7 @@ const paginatePosts = async (page) => {
             next_page,
             prev_page,
             total_posts: total,
-            posts: (posts.length) ? posts : ['the post list is empty']
+            posts: (posts.length) ? posts : []
         };
     } catch (error) {
         throw new Error(error);
@@ -59,7 +59,7 @@ const authorPosts = async (authorId, page) => {
             next_page,
             prev_page,
             total_posts: total,
-            posts: (posts.length) ? posts : ['the post list is empty']
+            posts: (posts.length) ? posts : []
         };
     } catch (error) {
         throw new Error(error);

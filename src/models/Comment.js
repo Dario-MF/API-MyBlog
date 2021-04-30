@@ -15,7 +15,7 @@ const commentSchema = new Schema({
         type: String,
         required: [true, 'comment is required.'],
         trim: true,
-        maxlength: [1000, 'The comment value exceeds the max field length 1000']
+        maxlength: [5000, 'The comment value exceeds the max field length 5000']
     }
 }, {
     versionKey: false,

@@ -24,7 +24,7 @@ const paginateUsers = async (page) => {
             next_page,
             prev_page,
             total_users: total,
-            users: (users.length) ? users : ['the users list is empty']
+            users: (users.length) ? users : []
         };
     } catch (error) {
         throw new Error(error);

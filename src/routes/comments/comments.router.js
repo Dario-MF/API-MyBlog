@@ -21,8 +21,8 @@ router.post('/:id', [
     check('comment')
         .notEmpty()
         .withMessage('comment is required')
-        .isLength({ max: 1000 })
-        .withMessage('The value specified comment exceeds the maximum field length 1000'),
+        .isLength({ max: 5000 })
+        .withMessage('The value specified comment exceeds the maximum field length 5000'),
     validateErrors,
     validatePost.isIdValidPost,
     validateToken,
@@ -38,8 +38,8 @@ router.put('/:id', [
     check('comment')
         .notEmpty()
         .withMessage('comment is required')
-        .isLength({ max: 1000 })
-        .withMessage('The value specified comment exceeds the maximum field length 1000'),
+        .isLength({ max: 5000 })
+        .withMessage('The value specified comment exceeds the maximum field length 5000'),
     validateErrors,
     validateComments.isCommentId,
     validateToken,

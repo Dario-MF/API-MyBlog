@@ -25,7 +25,7 @@ const paginateComments = async (page, post) => {
             next_page,
             prev_page,
             total_comments: total,
-            comments: (comments.length) ? comments : ['the comments list is empty']
+            comments: (comments.length) ? comments : []
         };
     } catch (error) {
         throw new Error(error);

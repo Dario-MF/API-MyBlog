@@ -8,18 +8,17 @@ const postSchema = new Schema({
     title: {
         type: String,
         trim: true,
-        maxlength: [50, 'The title is very long, max 50 words'],
+        maxlength: [150, 'The title is very long, max 50 words'],
         required: true
     },
     subtitle: {
         type: String,
         trim: true,
-        maxlength: [100, 'The subtitle is very long, max 100 words'],
+        maxlength: [150, 'The subtitle is very long, max 150 words'],
     },
     img: {
         type: String,
-        trim: true,
-        maxlength: [100, 'The path is very long, max 100 words'],
+        trim: true
     },
     article: {
         type: String,
