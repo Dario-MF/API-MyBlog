@@ -34,9 +34,7 @@ router.post('/', [
         .withMessage('The value specified subtilte exceeds the maximum field length 100'),
     check('article')
         .notEmpty()
-        .withMessage('article is required')
-        .isLength({ max: 2800 })
-        .withMessage('The value specified article exceeds the maximum field length 2800'),
+        .withMessage('article is required'),
     validateErrors,
     validateToken,
     validateUser.isUserIdToken,
@@ -60,9 +58,7 @@ router.put('/:id', [
         .withMessage('The value specified subtilte exceeds the maximum field length 100'),
     check('article')
         .notEmpty()
-        .withMessage('article is required')
-        .isLength({ max: 2800 })
-        .withMessage('The value specified article exceeds the maximum field length 2800'),
+        .withMessage('article is required'),
     validateErrors,
     validatePost.isIdValidPost,
     validateToken,

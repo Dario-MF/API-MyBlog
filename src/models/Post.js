@@ -24,7 +24,6 @@ const postSchema = new Schema({
     article: {
         type: String,
         trim: true,
-        maxlength: [2400, 'The post is very long, max 2400 words'],
         required: true
     }
 }, {
