@@ -35,7 +35,7 @@ const getAllPosts = async (req, res) => {
 const getPostById = async (req, res) => {
     const { id } = req.params;
     try {
-        const post = await Post.findById(id).populate('author', { _id: 0, name: 1, surname: 1 });
+        const post = await Post.findById(id).populate('author', { name: 1, surname: 1 });
         res.status(200).json({
             msg: 'post finded OK',
             data: post
