@@ -1,4 +1,6 @@
 const { paginatePosts, authorPosts } = require('../libs/querysPost');
+const cloudinary = require('cloudinary').v2
+cloudinary.config(process.env.CLOUDINARY_URL);
 const Post = require('../models/Post');
 
 
@@ -70,13 +72,23 @@ const createPost = async (req, res) => {
 
 
 const updatePost = async (req, res) => {
-    const { title, subtitle = '', img, article } = req.body;
+    const { title, subtitle, article } = req.body;
     const { id } = req.params;
 
     try {
-        const post = await Post.findByIdAndUpdate(id, { title, subtitle, img, article }, { new: true });
-        await post.populate('author', { name: 1, surname: 1 }).execPopulate();
+        let post;
+        if (!req.files || !req.files.archivo || Object.keys(req.files).length === 0) {
+            post = await Post.findByIdAndUpdate(id, { title, subtitle, article }, { new: true });
 
+        } else {
+            const { tempFilePath } = req.files.archivo;
+            const { secure_url } = await cloudinary.uploader.upload(tempFilePath)
+            const img = secure_url;
+
+            post = await Post.findByIdAndUpdate(id, { title, subtitle, article, img }, { new: true });
+        }
+
+        await post.populate('author', { name: 1, surname: 1 }).execPopulate();
         res.status(200).json({
             msg: 'post updated: OK',
             data: post
