@@ -64,10 +64,10 @@ const updateUser = async (req, res) => {
             email: (email) ? email : user.email,
             roles: (idRoles) ? idRoles : user.roles,
             password: (newPassword && oldPassword) ? await User.ecryptPassword(newPassword) : user.password,
-            facebookUrl,
-            twitterUrl,
-            githubUrl,
-            linkedinUrl
+            facebookUrl: (facebookUrl) ? facebookUrl : user.facebookUrl,
+            twitterUrl: (twitterUrl) ? twitterUrl : user.twitterUrl,
+            githubUrl: (githubUrl) ? githubUrl : user.githubUrl,
+            linkedinUrl: (linkedinUrl) ? linkedinUrl : user.linkedinUrl
         }, { new: true });
 
         await updated.populate('roles', { name: 1, _id: 0 }).execPopulate();
@@ -90,7 +90,7 @@ const deleteUser = async (req, res) => {
     try {
         await User.findByIdAndUpdate(id, { state: false }, { new: true });
         res.status(200).json({
-            error: 'user deleted'
+            msg: 'user deleted'
         });
     } catch (error) {
         res.status(500).json({

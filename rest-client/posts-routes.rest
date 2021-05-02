@@ -6,6 +6,11 @@ GET http://localhost:8000/api/posts?page=1
 
 ###
 // Buscar posts por author id y/o pagina.
+GET http://localhost:8000/api/posts?search=titulo&page=1
+
+
+###
+// Buscar posts por author id y/o pagina.
 GET http://localhost:8000/api/posts?author=608ee8190f3f03319ccc4f3a&page=1
 
 ###

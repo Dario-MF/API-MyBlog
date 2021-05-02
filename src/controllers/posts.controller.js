@@ -1,4 +1,4 @@
-const { paginatePosts, authorPosts } = require('../libs/querysPost');
+const { paginatePosts, authorPosts, searchPosts } = require('../libs/querysPost');
 const cloudinary = require('cloudinary').v2
 cloudinary.config(process.env.CLOUDINARY_URL);
 const Post = require('../models/Post');
@@ -8,6 +8,7 @@ const Post = require('../models/Post');
 const getAllPosts = async (req, res) => {
     const page = Number(req.query.page) || 1;
     const { author } = req.query;
+    const { search } = req.query;
 
     try {
         let data;
@@ -15,6 +16,9 @@ const getAllPosts = async (req, res) => {
             // busqueda por author y pagina.
             data = await authorPosts(author, page);
             data.author = req.author;
+        } else if (search) {
+            // busqueda por palabra.
+            data = await searchPosts(search, page);
         } else {
             // busqueda normal por pagina.
             data = await paginatePosts(page);
