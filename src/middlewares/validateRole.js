@@ -59,7 +59,6 @@ const updateRole = async (req, res, next) => {
             return next();
 
         } else {
-            console.log('no autorizado a cambiar roles', rolesReq)
             req.body.idRoles = null;
             return next();
         };

@@ -37,7 +37,7 @@ const getAllPosts = async (req, res) => {
 const getPostById = async (req, res) => {
     const { id } = req.params;
     try {
-        const post = await Post.findById(id).populate('author', { name: 1, surname: 1 });
+        const post = await Post.findById(id).populate('author');
         res.status(200).json({
             msg: 'post finded OK',
             data: post
@@ -57,7 +57,7 @@ const createPost = async (req, res) => {
     const img = req.img;
     try {
         const newPost = await Post.create({ author: _id, title, subtitle, img, article });
-        await newPost.populate('author', { name: 1, surname: 1 }).execPopulate();
+        await newPost.populate('author').execPopulate();
 
         res.status(200).json({
             msg: 'post created: OK',
@@ -88,7 +88,7 @@ const updatePost = async (req, res) => {
             post = await Post.findByIdAndUpdate(id, { title, subtitle, article, img }, { new: true });
         }
 
-        await post.populate('author', { name: 1, surname: 1 }).execPopulate();
+        await post.populate('author').execPopulate();
         res.status(200).json({
             msg: 'post updated: OK',
             data: post

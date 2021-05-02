@@ -40,9 +40,6 @@ router.put('/:id', [
         .withMessage('email is invalid')
         .isLength({ min: 6, max: 30 })
         .withMessage("email can contain max 30 characters"),
-    check('newPassword')
-        .custom(validateUser.checkPassword)
-        .withMessage('the password must contain a minimum of 6, a maximum of 20 characters and a number'),
     validateErrors,
     validateToken,
     validateUser.isUserIdToken,

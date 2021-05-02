@@ -45,6 +45,7 @@ const authorPosts = async (authorId, page) => {
                 .sort({ 'updatedAt': -1 })
                 .skip(perPage * page - perPage)//Calculo para paginación.
                 .limit(perPage)
+                .populate('author')
         ]);
         const pages = Math.ceil(total / perPage);// Calculo paginas totales.
         const next_page = (page >= pages)

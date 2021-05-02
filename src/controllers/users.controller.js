@@ -33,12 +33,13 @@ const getUserWithId = async (req, res) => {
 
 const updateUser = async (req, res) => {
     const { name, surname, email, idRoles, img, newPassword, oldPassword } = req.body;
+    const { facebookUrl, twitterUrl, githubUrl, linkedinUrl } = req.body;
     const { id } = req.params;
     try {
         const user = await User.findById(id);
         // Validar password
         let msgPassword = 'password no updated';
-        if (newPassword && oldPassword) {
+        if (newPassword.length && oldPassword.length) {
             const validPassword = await User.comparePassword(oldPassword, user.password);
             if (!validPassword) {
                 return res.status(400).json({
@@ -63,7 +64,11 @@ const updateUser = async (req, res) => {
             email: (email) ? email : user.email,
             img: (img) ? img : user.img,
             roles: (idRoles) ? idRoles : user.roles,
-            password: (newPassword && oldPassword) ? await User.ecryptPassword(newPassword) : user.password
+            password: (newPassword && oldPassword) ? await User.ecryptPassword(newPassword) : user.password,
+            facebookUrl,
+            twitterUrl,
+            githubUrl,
+            linkedinUrl
         }, { new: true });
 
         await updated.populate('roles', { name: 1, _id: 0 }).execPopulate();

@@ -38,6 +38,18 @@ const userSchema = new Schema({
         type: Boolean,
         default: false
     },
+    facebookUrl: {
+        type: String
+    },
+    twitterUrl: {
+        type: String
+    },
+    githubUrl: {
+        type: String
+    },
+    linkedinUrl: {
+        type: String
+    },
     state: {
         type: Boolean,
         default: true

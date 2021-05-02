@@ -9,17 +9,23 @@ GET http://localhost:3000/api/users/60679ca961415b353c7cff06
 
 ###
 // Actualizar usuario, restringido a dueño de la cuenta o rango Administrador(modificar rol, solo administrador).
-PUT http://localhost:3000/api/users/6068d2e0815245211c5f2428
+PUT http://localhost:8000/api/users/6068d2e0815245211c5f2428
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MDYyNjdmY2EyY2UzYTBiNzQ5NDhiZDIiLCJpYXQiOjE2MTc0OTcxNzksImV4cCI6MTYxNzU4MzU3OX0.0POdKRo2sUuA6XauThlRWRv-neddXY5ReIKm89RaB6k
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MDYyNjdmY2EyY2UzYTBiNzQ5NDhiZDIiLCJpYXQiOjE2MTk5MzE4NDYsImV4cCI6MTYyMDAxODI0Nn0.9VteLXEaCws49sbqGcUSwkhLHWTt9cABEV_X1j9tctE
 
 {
     "name": "Test5",
     "surname": "Test Test",
     "email": "test5@test.com",
-    "roles": ["MODERATOR_ROLE"],
-    "newPassword": "password1",
-    "oldPassword": "password1"
+    
+    "newPassword": "",
+    "oldPassword": "",
+    "facebookUrl": "https://es-es.facebook.com/",
+    "githubUrl": "",
+    "linkedinUrl": "",
+    "twitterUrl": "",
+    "newPasword": "",
+    "oldPassword": ""
 }
 
 ###
