@@ -32,7 +32,7 @@ const getUserWithId = async (req, res) => {
 };
 
 const updateUser = async (req, res) => {
-    const { name, surname, email, idRoles, img, newPassword, oldPassword } = req.body;
+    const { name, surname, email, idRoles, newPassword, oldPassword } = req.body;
     const { facebookUrl, twitterUrl, githubUrl, linkedinUrl } = req.body;
     const { id } = req.params;
     try {
@@ -62,7 +62,6 @@ const updateUser = async (req, res) => {
             name: (name) ? name : user.name,
             surname: (surname) ? surname : user.surname,
             email: (email) ? email : user.email,
-            img: (img) ? img : user.img,
             roles: (idRoles) ? idRoles : user.roles,
             password: (newPassword && oldPassword) ? await User.ecryptPassword(newPassword) : user.password,
             facebookUrl,

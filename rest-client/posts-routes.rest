@@ -6,7 +6,7 @@ GET http://localhost:8000/api/posts?page=1
 
 ###
 // Buscar posts por author id y/o pagina.
-GET http://localhost:3000/api/posts?author=606267fca2ce3a0b74948bd2&page=2
+GET http://localhost:8000/api/posts?author=608ee8190f3f03319ccc4f3a&page=1
 
 ###
 // Buscar por id del post.

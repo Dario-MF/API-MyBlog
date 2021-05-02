@@ -25,11 +25,14 @@ const refresh = async (req, res) => {
 const signUp = async (req, res) => {
     try {
         const { name, surname, email, img, password, idRoles } = req.body;
+
+        const gravatarImg = `https://gravatar.com/avatar/${md5(email)}?d=retro`;
+
         const newUser = new User({
             name,
             surname,
             email,
-            img: (img) ? img : md5(email),
+            img: (img) ? img : gravatarImg,
             roles: idRoles,
             password: await User.ecryptPassword(password)
         });
@@ -75,7 +78,7 @@ const signIn = async (req, res) => {
         // Grabar token
         const token = jwt.sign({ uid: user._id }, process.env.SECRET_JWT, {
             expiresIn: 86400
-        });   
+        });
         res.status(200).json({
             msg: 'Signin correct',
             token,

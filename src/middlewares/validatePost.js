@@ -13,7 +13,7 @@ const isIdValidQuery = async (req, res, next) => {
                     error: 'Id invalid',
                 });
             };
-            const authorData = await User.findById(author, { name: 1, surname: 1 });
+            const authorData = await User.findById(author);
             // Validar id existe.
             if (!authorData) {
                 return res.status(400).json({

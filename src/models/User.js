@@ -72,8 +72,7 @@ userSchema.statics.comparePassword = async (password, receivedPassword) => {
 
 // Parsing for all response json.
 userSchema.methods.toJSON = function () {
-    const { password, _id, img, ...user } = this.toObject();
-    user.img = `https://gravatar.com/avatar/${img}?d=retro`;
+    const { password, _id, ...user } = this.toObject();
     user.posts = `${process.env.PATH_API}/posts?author=${_id}&page=1`;
     user.uid = _id;
     return user;

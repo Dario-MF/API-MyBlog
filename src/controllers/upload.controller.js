@@ -29,8 +29,8 @@ const actualizarImgCloudinary = async (req, res) => {
                 break;
 
             default:
-                res.status(500).json({ 
-                    error: 'coleccion no contemplada' 
+                res.status(500).json({
+                    error: 'coleccion no contemplada'
                 })
                 break;
         };
@@ -43,12 +43,10 @@ const actualizarImgCloudinary = async (req, res) => {
         const { tempFilePath } = req.files.archivo;
         const { secure_url } = await cloudinary.uploader.upload(tempFilePath)
 
-        modelo.img = secure_url;
-
-        await modelo.save();
+        await modelo.update({ img: secure_url });
 
         res.json({
-            msg: 'peticion OK',
+            msg: 'Img updated OK',
             data: modelo
         });
     } catch (error) {
