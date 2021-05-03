@@ -2,7 +2,7 @@
 
 ###
 //Buscar posts por pagina.
-GET http://localhost:8000/api/posts?page=1
+GET https://api-backend-myblog.herokuapp.com/api/posts?page=1
 
 ###
 // Buscar posts por author id y/o pagina.
