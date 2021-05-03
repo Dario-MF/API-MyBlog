@@ -14,12 +14,12 @@ Content-Type: application/json
 
 ###
 // Loguearse.
-POST http://localhost:8000/api/auth/signin
+POST https://api-backend-myblog.herokuapp.com/api/auth/signin
 Content-Type: application/json
 
 {
-    "email": "ferrada20@gmail.com",
-    "password": "nalanoel25"
+    "email": "ferrada86@gmail.com",
+    "password": "delfin86"
 }
 
 ###
