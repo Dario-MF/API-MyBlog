@@ -1,7 +1,7 @@
 ///////////////////////---- USERS ROUTES-----\\\\\\\\\\\\\\\\\\\\\\\\
 ###
 // Buscar usuarios por pagina (ruta abierta información de usuario limitada)
-GET http://localhost:3000/api/users?page=1
+GET https://api-backend-myblog.herokuapp.com/api/users?page=1
 
 ###
 // Buscar usuario por ID (ruta abierta información de usuario limitada)
