@@ -2,11 +2,11 @@
 
 ###
 // Buscar comentarios por post ID y paginación.
-GET http://localhost:3000/api/comments/6068ed240310de1f5cc72aa3?page=1
+GET http://localhost:8000/api/comments/6068ed240310de1f5cc72aa3?page=1
 
 ###
 // Crear comentario enlazando post y author, ruta restringida a minimo usuario.
-POST http://localhost:3000/api/comments/6068ed240310de1f5cc72aa3
+POST http://localhost:8000/api/comments/6068ed240310de1f5cc72aa3
 Content-Type: application/json
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MDYyNjdmY2EyY2UzYTBiNzQ5NDhiZDIiLCJpYXQiOjE2MTc0ODkxMTcsImV4cCI6MTYxNzU3NTUxN30.ht7mf3hfhGVWJjxz94Mul21D9jRe2iE131qWQpamB4A
 
@@ -16,7 +16,7 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MDYyNjdmY2EyY2Uz
 
 ###
 // Actualizar comentario pasado por id, ruta restringida para author o rangos Moderador y Administrador.
-PUT http://localhost:3000/api/comments/6068fcc4322dec0d0cf637a8
+PUT http://localhost:8000/api/comments/6068fcc4322dec0d0cf637a8
 Content-Type: application/json
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MDYyNjdmY2EyY2UzYTBiNzQ5NDhiZDIiLCJpYXQiOjE2MTc0ODkxMTcsImV4cCI6MTYxNzU3NTUxN30.ht7mf3hfhGVWJjxz94Mul21D9jRe2iE131qWQpamB4A
 
@@ -26,6 +26,6 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MDYyNjdmY2EyY2Uz
 
 ###
 // Eliminar comentario pasado por id,  ruta restringida para author o rangos Moderador y Administrador.
-DELETE http://localhost:3000/api/comments/6068f44f62b59d1d7895f8c4
+DELETE http://localhost:8000/api/comments/6068f44f62b59d1d7895f8c4
 Content-Type: application/json
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MDYyNjdmY2EyY2UzYTBiNzQ5NDhiZDIiLCJpYXQiOjE2MTc0ODkxMTcsImV4cCI6MTYxNzU3NTUxN30.ht7mf3hfhGVWJjxz94Mul21D9jRe2iE131qWQpamB4A
