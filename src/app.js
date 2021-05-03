@@ -21,16 +21,17 @@ app.use(fileUpload({
     tempFileDir: '/tmp/',
     createParentPath: true
 }));
+app.use( express.static('public'));
 
 // Router API
 app.use('/api', apiRouter);
 
 // Catch error path
-app.use('*', (req, res) => {
+/* app.use('*', (req, res) => {
     res.status(404).json({
         error: 'Not found'
     });
 });
-
+ */
 
 module.exports = app;
