@@ -2,13 +2,13 @@
 
 ###
 // Buscar comentarios por post ID y paginación.
-GET http://localhost:8000/api/comments/6068ed240310de1f5cc72aa3?page=1
+GET http://localhost:8000/api/comments/609328808793a12e60525fc3?page=1
 
 ###
 // Crear comentario enlazando post y author, ruta restringida a minimo usuario.
-POST http://localhost:8000/api/comments/6068ed240310de1f5cc72aa3
+POST http://localhost:8000/api/comments/609328808793a12e60525fc3
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MDYyNjdmY2EyY2UzYTBiNzQ5NDhiZDIiLCJpYXQiOjE2MTc0ODkxMTcsImV4cCI6MTYxNzU3NTUxN30.ht7mf3hfhGVWJjxz94Mul21D9jRe2iE131qWQpamB4A
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MDkzMjIwMDg3OTNhMTJlNjA1MjVmYzEiLCJpYXQiOjE2MjAyNTUyMzIsImV4cCI6MTYyMDM0MTYzMn0.y8cz05rRVo-EyuBnjmkd8q4IegBfU0mlJZICCFK7S2k
 
 {
     "comment": "Este es un comentario de prueba"
@@ -26,6 +26,6 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MDYyNjdmY2EyY2Uz
 
 ###
 // Eliminar comentario pasado por id,  ruta restringida para author o rangos Moderador y Administrador.
-DELETE http://localhost:8000/api/comments/6068f44f62b59d1d7895f8c4
+DELETE http://localhost:8000/api/comments/60932b908793a12e60525fc5
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MDYyNjdmY2EyY2UzYTBiNzQ5NDhiZDIiLCJpYXQiOjE2MTc0ODkxMTcsImV4cCI6MTYxNzU3NTUxN30.ht7mf3hfhGVWJjxz94Mul21D9jRe2iE131qWQpamB4A
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MDkzMjIwMDg3OTNhMTJlNjA1MjVmYzEiLCJpYXQiOjE2MjAyNTUyMzIsImV4cCI6MTYyMDM0MTYzMn0.y8cz05rRVo-EyuBnjmkd8q4IegBfU0mlJZICCFK7S2k

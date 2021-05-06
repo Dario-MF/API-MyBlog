@@ -54,10 +54,10 @@ router.delete('/:id', [
         .isMongoId()
         .withMessage('No is id valid'),
     validateErrors,
-    validateComments.isCommentId,
     validateToken,
     validateUser.isUserIdToken,
     validateRol.authenticateRole(['USER_ROLE', 'MODERATOR_ROLE', 'ADMIN_ROLE']),
+    validateComments.isCommentId,
     validateComments.isAuthorComment
 ], commentCtrl.deleteComment);
 

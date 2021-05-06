@@ -7,7 +7,7 @@ Content-Type: application/json
 {
     "name": "Dario",
     "surname": "Mariño Ferrada",
-    "email": "ferrada86@gmail.com",
+    "email": "ferrada24@gmail.com",
     "roles": ["USER_ROLE"],
     "password": "password86"
 }
@@ -18,11 +18,11 @@ POST http://localhost:8000/api/auth/signin
 Content-Type: application/json
 
 {
-    "email": "ferrada86@gmail.com",
+    "email": "ferrada22@gmail.com",
     "password": "password86"
 }
 
 ###
 // Refresh del token.
 GET  http://localhost:8000/api/auth/refresh
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MDYzNGRlNzg5ZWY3ZTFlNTgyZDk5MWMiLCJpYXQiOjE2MTk1Mzc4MjIsImV4cCI6MTYxOTYyNDIyMn0.Aw7glcJ29OG6Sd6GoapaHVaF2udLn8pOxHeniuOsQRQ
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MDkyZjM0Yzg3OTNhMTJlNjA1MjVmYmYiLCJpYXQiOjE2MjAyNDM4MzcsImV4cCI6MTYyMDMzMDIzN30.lz3ufxvaPplLwKWbeH3-EN4dm9Zd3Ruq_BZRPwX1vP8

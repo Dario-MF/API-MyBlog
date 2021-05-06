@@ -58,9 +58,10 @@ const isAuthorPost = async (req, res, next) => {
                 error: 'id post no exist'
             });
         };
+        console.log(_id === postId)
         const userRoles = await Role.find({ _id: { $in: roles } });
         const validUser = userRoles.map(rol => {
-            if (rol.name === 'USER_ROLE' && toString(_id) !== toString(post.author)) {
+            if (rol.name === 'USER_ROLE' && String(_id) !== String(postId)) {
                 return false;
             };
             return true;

@@ -56,7 +56,7 @@ const isOwnerUser = async (req, res, next) => {
         };
         const userRoles = await Role.find({ _id: { $in: roles } });
         const validUser = userRoles.map(rol => {
-            if (rol.name !== 'ADMIN_ROLE' && toString(_id) !== toString(paramUser._id)) {
+            if (rol.name !== 'ADMIN_ROLE' && String(_id) !== String(paramId)) {
                 return false;
             };
             return true;

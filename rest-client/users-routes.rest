@@ -5,18 +5,18 @@ GET http://localhost:8000/api/users?page=1
 
 ###
 // Buscar usuario por ID (ruta abierta información de usuario limitada)
-GET http://localhost:8000/api/users/60679ca961415b353c7cff06
+GET http://localhost:8000/api/users/6092f34c8793a12e60525fbf
 
 ###
 // Actualizar usuario, restringido a dueño de la cuenta o rango Administrador(modificar rol, solo administrador).
-PUT http://localhost:8000/api/users/6068d2e0815245211c5f2428
+PUT http://localhost:8000/api/users/6092f34c8793a12e60525fbf
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MDYyNjdmY2EyY2UzYTBiNzQ5NDhiZDIiLCJpYXQiOjE2MTk5MzE4NDYsImV4cCI6MTYyMDAxODI0Nn0.9VteLXEaCws49sbqGcUSwkhLHWTt9cABEV_X1j9tctE
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MDkyZjM0Yzg3OTNhMTJlNjA1MjVmYmYiLCJpYXQiOjE2MjAyNTE4NjEsImV4cCI6MTYyMDMzODI2MX0.hgtQ4rTmGJ6k5FSTvO7aP0QFa42U8ip0NeqRQHan-e8
 
 {
-    "name": "Test5",
-    "surname": "Test Test",
-    "email": "test5@test.com",
+    "name": "Dario",
+    "surname": "Mariño Ferrada",
+    "email": "ferrada86@gmail.com",
     
     "newPassword": "",
     "oldPassword": "",
@@ -30,5 +30,5 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MDYyNjdmY2EyY2Uz
 
 ###
 // Elimnar Usuario, pasa a estado false, restringido a dueño de la cuenta o rango Administrador.
-DELETE  http://localhost:8000/api/users/6062685fa2ce3a0b74948bd5
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MDYyNjdmY2EyY2UzYTBiNzQ5NDhiZDIiLCJpYXQiOjE2MTczODU4NTUsImV4cCI6MTYxNzQ3MjI1NX0.-tEHZd-DOkRsJDOzodJbAOF4EnbmcodYfK5M1EXsn4A
+DELETE  http://localhost:8000/api/users/6092f34c8793a12e60525fbf
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MDkyZjM0Yzg3OTNhMTJlNjA1MjVmYmYiLCJpYXQiOjE2MjAyNTE4NjEsImV4cCI6MTYyMDMzODI2MX0.hgtQ4rTmGJ6k5FSTvO7aP0QFa42U8ip0NeqRQHan-e8

@@ -5,13 +5,13 @@
 GET http://localhost:8000/api/posts?page=1
 
 ###
-// Buscar posts por author id y/o pagina.
+// Buscar posts por palabra.
 GET http://localhost:8000/api/posts?search=titulo&page=1
 
 
 ###
 // Buscar posts por author id y/o pagina.
-GET http://localhost:8000/api/posts?author=608ee8190f3f03319ccc4f3a&page=1
+GET http://localhost:8000/api/posts?author=60931a4e8793a12e60525fc0&page=1
 
 ###
 // Buscar por id del post.
@@ -22,7 +22,7 @@ GET http://localhost:8000/api/posts/606903c5ce874c2caceefbc4
 //necesita img en formato "multipart/form-data"
 POST http://localhost:8000/api/posts 
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MDYyNjdmY2EyY2UzYTBiNzQ5NDhiZDIiLCJpYXQiOjE2MTc0ODkxMTcsImV4cCI6MTYxNzU3NTUxN30.ht7mf3hfhGVWJjxz94Mul21D9jRe2iE131qWQpamB4A
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MDkyZjM0Yzg3OTNhMTJlNjA1MjVmYmYiLCJpYXQiOjE2MjAyNDM4MzcsImV4cCI6MTYyMDMzMDIzN30.lz3ufxvaPplLwKWbeH3-EN4dm9Zd3Ruq_BZRPwX1vP8
 
 {
     "title": "Titulo de prueba 23:00",
@@ -32,9 +32,9 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MDYyNjdmY2EyY2Uz
 
 ###
 // Modificar post, restringido para author o rango administrador/moderador.
-PUT http://localhost:8000/api/posts/606903c5ce874c2caceefbc7
+PUT http://localhost:8000/api/posts/609328808793a12e60525fc3
 Content-Type: application/json
-Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MDYyNjdmY2EyY2UzYTBiNzQ5NDhiZDIiLCJpYXQiOjE2MTc0ODkxMTcsImV4cCI6MTYxNzU3NTUxN30.ht7mf3hfhGVWJjxz94Mul21D9jRe2iE131qWQpamB4A
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MDkzMzc3NjI5NDc3YzFmOGM4NDM2ODIiLCJpYXQiOjE2MjAyNjIwNzUsImV4cCI6MTYyMDM0ODQ3NX0.0HNdVPTnzga-inJsFEaLH2D-VuVpseyin0jWxbgnlsI
 
 {
     "title": "Titulo de prueba 2",
@@ -44,5 +44,5 @@ Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MDYyNjdmY2EyY2UzY
 
 ###
 // Eliminar post, restringido para author o rango administrador/moderador.
-DELETE http://localhost:8000/api/posts/60677056917ef436b8a004d8
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MDY3NDZhYmI1MTI1ODA0ZTA1NTBlNWUiLCJpYXQiOjE2MTczODEwMzUsImV4cCI6MTYxNzQ2NzQzNX0.MPIFdgKHOQKFQCK2-gS-VSYkJP2RGeHLxMCfh_Wdnkg
+DELETE http://localhost:8000/api/posts/6093220c8793a12e60525fc2
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MDkzMjIwMDg3OTNhMTJlNjA1MjVmYzEiLCJpYXQiOjE2MjAyNTUyMzIsImV4cCI6MTYyMDM0MTYzMn0.y8cz05rRVo-EyuBnjmkd8q4IegBfU0mlJZICCFK7S2k
