@@ -2,16 +2,17 @@ const router = require('express').Router();
 const { check } = require('express-validator');
 const { validateErrors, validateRol, validateUser, validateToken } = require('../../middlewares');
 const { signUp, signIn, refresh } = require('../../controllers/auth.controller');
+const isEmailValid = require('../../middlewares/emailValidator');
 
 
 
 
 
-router.get('/refresh',[
+router.get('/refresh', [
     validateToken,
     validateUser.isUserIdToken,
     validateRol.authenticateRole(['USER_ROLE', 'MODERATOR_ROLE', 'ADMIN_ROLE'])
-], refresh );
+], refresh);
 
 
 router.post('/signup', [
@@ -43,6 +44,7 @@ router.post('/signup', [
         .matches(/\d/)
         .withMessage('password must contain a number'),
     validateRol.isValidRole,
+    isEmailValid,
     validateErrors
 ], signUp);
 

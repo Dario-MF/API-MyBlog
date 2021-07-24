@@ -1,5 +1,6 @@
 const { Schema, model } = require('mongoose');
 const bcrypt = require('bcryptjs');
+const { verify } = require('jsonwebtoken');
 require('dotenv').config();
 
 
@@ -53,6 +54,13 @@ const userSchema = new Schema({
     state: {
         type: Boolean,
         default: true
+    },
+    verify: {
+        type: Boolean,
+        default: false
+    },
+    codeEmail: {
+        type: String
     }
 }, {
     timestamps: true,
@@ -72,7 +80,7 @@ userSchema.statics.comparePassword = async (password, receivedPassword) => {
 
 // Parsing for all response json.
 userSchema.methods.toJSON = function () {
-    const { password, _id, ...user } = this.toObject();
+    const { password, _id, codeEmail, ...user } = this.toObject();
     user.posts = `${process.env.PATH_API}/posts?author=${_id}&page=1`;
     user.uid = _id;
     return user;

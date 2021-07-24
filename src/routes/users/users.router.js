@@ -1,14 +1,17 @@
 const router = require('express').Router();
 const { check } = require('express-validator');
-const { getAllUsers, getUserWithId, updateUser, deleteUser } = require('../../controllers/users.controller');
+const { getAllUsers, getUserWithId, updateUser, deleteUser, confirmEmail } = require('../../controllers/users.controller');
 const { validateToken, validateUser, validateErrors, validateRol } = require('../../middlewares');
+const isEmailValid = require('../../middlewares/emailValidator');
 
 
-// todos los usuarios
+// todos los usuarios.
 router.get('/', getAllUsers);
 
+// confirmar email usuario.
+router.get('/confirm/:code', confirmEmail);
 
-// usuario por id
+// usuario por id.
 router.get('/:id', [
     check('id')
         .isMongoId()
@@ -41,6 +44,7 @@ router.put('/:id', [
         .isLength({ min: 6, max: 30 })
         .withMessage("email can contain max 30 characters"),
     validateErrors,
+    isEmailValid,
     validateToken,
     validateUser.isUserIdToken,
     validateUser.isUserIdParam,

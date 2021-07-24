@@ -100,9 +100,40 @@ const deleteUser = async (req, res) => {
 };
 
 
+const confirmEmail = async (req, res) => {
+    const { code } = req.params;
+    try {
+        const user = await User.findOne({ codeEmail: code });
+        if (!user) {
+            return res.status(400).json({
+                error: 'user not found'
+            })
+        }
+        const updated = await User.findByIdAndUpdate(user._id, {
+            codeEmail: '',
+            verify: true
+        }, { new: true });
+
+        await updated.populate('roles', { name: 1, _id: 0 }).execPopulate();
+
+        res.status(200).json({
+            msg: 'email confirmed',
+            data: updated
+        });
+
+    } catch (error) {
+        res.status(500).json({
+            error: 'error in server'
+        });
+    };
+};
+
+
+
 module.exports = {
     getAllUsers,
     getUserWithId,
     updateUser,
-    deleteUser
+    deleteUser,
+    confirmEmail
 };

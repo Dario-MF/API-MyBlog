@@ -7,7 +7,7 @@ Content-Type: application/json
 {
     "name": "Dario",
     "surname": "Mariño Ferrada",
-    "email": "ferrada24@gmail.com",
+    "email": "ferrada86@gmail.com",
     "roles": ["USER_ROLE"],
     "password": "password86"
 }

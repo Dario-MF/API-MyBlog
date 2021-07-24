@@ -1,6 +1,8 @@
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
+const { v4: uuidv4 } = require('uuid');
 const md5 = require('md5');
+const { getTemplate, sendMail } = require('../libs/configMail');
 
 
 const refresh = async (req, res) => {
@@ -28,15 +30,24 @@ const signUp = async (req, res) => {
 
         const gravatarImg = `https://gravatar.com/avatar/${md5(email)}?d=retro`;
 
+        const codeEmail = uuidv4();
+
         const newUser = new User({
             name,
             surname,
             email,
             img: (img) ? img : gravatarImg,
             roles: idRoles,
-            password: await User.ecryptPassword(password)
+            password: await User.ecryptPassword(password),
+            codeEmail
         });
+
+        const templateEmail = getTemplate(name, codeEmail);
+
+        const respMail = await sendMail(email, 'Activar cuenta en MyBlog', templateEmail)
+
         const savedUser = await newUser.save();
+
         const token = jwt.sign({ uid: savedUser._id }, process.env.SECRET_JWT, {
             expiresIn: 86400
         });
