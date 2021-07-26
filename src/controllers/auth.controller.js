@@ -44,7 +44,8 @@ const signUp = async (req, res) => {
 
         const templateEmail = getTemplate(name, codeEmail);
 
-        const respMail = await sendMail(email, 'Activar cuenta en MyBlog', templateEmail)
+        const respMail = await sendMail(email, 'Activar cuenta en MyBlog', templateEmail);
+        console.log(respMail)
 
         const savedUser = await newUser.save();
 

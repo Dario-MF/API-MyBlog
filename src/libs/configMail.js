@@ -41,7 +41,7 @@ const getTemplate = (name, code) => {
             <h2>Bienvenido a MyBlog</h2>   
             <p>Para confirmar tu cuenta, ingresa al siguiente enlace</p>
             <a
-                href="http://localhost:8000/api/users/confirm/${code}"
+                href="http://localhost:3000/confirm/${code}"
                 target="_blank"
             >Confirmar Cuenta</a>
         </div>
