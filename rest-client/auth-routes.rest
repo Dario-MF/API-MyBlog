@@ -18,7 +18,7 @@ POST http://localhost:8000/api/auth/signin
 Content-Type: application/json
 
 {
-    "email": "ferrada22@gmail.com",
+    "email": "ferrada86@gmail.com",
     "password": "password86"
 }
 
@@ -26,3 +26,7 @@ Content-Type: application/json
 // Refresh del token.
 GET  http://localhost:8000/api/auth/refresh
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MDkyZjM0Yzg3OTNhMTJlNjA1MjVmYmYiLCJpYXQiOjE2MjAyNDM4MzcsImV4cCI6MTYyMDMzMDIzN30.lz3ufxvaPplLwKWbeH3-EN4dm9Zd3Ruq_BZRPwX1vP8
+
+###
+// Renviar email validacion
+GET  http://localhost:8000/api/users/resend_email/60fc6904c772ef394cf8c1d2

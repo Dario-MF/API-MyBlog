@@ -1,5 +1,7 @@
 const User = require('../models/User');
+const { v4: uuidv4 } = require('uuid');
 const { paginateUsers } = require('../libs/querysUsers');
+const { getTemplate, sendMail } = require('../libs/configMail');
 
 const getAllUsers = async (req, res) => {
     const page = Number(req.query.page) || 1;
@@ -128,6 +130,35 @@ const confirmEmail = async (req, res) => {
     };
 };
 
+const resendEmail = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const user = await User.findById(id);
+        if (!user) {
+            return res.status(400).json({
+                error: 'user not found'
+            })
+        }
+        const codeEmail = uuidv4();
+
+        await User.findByIdAndUpdate(id, {
+            codeEmail
+        });
+
+        const templateEmail = getTemplate(user.name, codeEmail);
+
+        const respMail = await sendMail(user.email, 'Activar cuenta en MyBlog', templateEmail);
+        console.log(respMail)
+
+        res.status(200).json({
+            msg: 'OK, email sended',
+        });
+    } catch (error) {
+        res.status(500).json({
+            error: 'error in server'
+        });
+    };
+}
 
 
 module.exports = {
@@ -135,5 +166,6 @@ module.exports = {
     getUserWithId,
     updateUser,
     deleteUser,
-    confirmEmail
+    confirmEmail,
+    resendEmail
 };

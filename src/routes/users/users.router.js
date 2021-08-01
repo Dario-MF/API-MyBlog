@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const { check } = require('express-validator');
-const { getAllUsers, getUserWithId, updateUser, deleteUser, confirmEmail } = require('../../controllers/users.controller');
+const { getAllUsers, getUserWithId, updateUser, deleteUser, confirmEmail, resendEmail } = require('../../controllers/users.controller');
 const { validateToken, validateUser, validateErrors, validateRol } = require('../../middlewares');
 const isEmailValid = require('../../middlewares/emailValidator');
 
@@ -10,6 +10,9 @@ router.get('/', getAllUsers);
 
 // confirmar email usuario.
 router.get('/confirm/:code', confirmEmail);
+
+// reenviar email confirmación.
+router.get('/resend_email/:id', resendEmail);
 
 // usuario por id.
 router.get('/:id', [
